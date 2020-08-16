@@ -12,14 +12,14 @@
 				"${workspaceFolder}\\bin\\RasterEngine.exe",
 
 				/*Include Paths*/
-				"-I${workspaceFolder}\\dependencies\\include\\GLFW",
-				"-I${workspaceFolder}\\dependencies\\include\\GL",
+				"-I${workspaceFolder}\\dependencies\\include",
 				
 				// /*Library Paths*/
 				"-L${workspaceFolder}\\dependencies\\libraries",
 
 				/*libraries*/
 				"-lglfw3",
+				"-lglew32s",
 				"-lopengl32",
 				"-lUser32",
 				"-lGdi32",
