@@ -1,0 +1,43 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "Build RasterEngine",
+			"command": "F:\\TDM-GCC\\bin\\g++.exe",
+			"args": [
+				"-g",
+				"${workspaceFolder}\\source\\main.cpp",
+				"-o",
+				"${workspaceFolder}\\bin\\RasterEngine.exe",
+
+				/*Include Paths*/
+				"-I${workspaceFolder}\\dependencies\\include\\GLFW",
+				"-I${workspaceFolder}\\dependencies\\include\\GL",
+				
+				// /*Library Paths*/
+				"-L${workspaceFolder}\\dependencies\\libraries",
+
+				/*libraries*/
+				"-lglfw3",
+				"-lopengl32",
+				"-lUser32",
+				"-lGdi32",
+				"-lShell32",
+				
+				//32bit binary
+				"-m32"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}
