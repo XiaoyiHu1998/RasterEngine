@@ -7,7 +7,7 @@
 			"command": "F:\\TDM-GCC\\bin\\g++.exe",
 			"args": [
 				"-g",
-				"${workspaceFolder}\\source\\main.cpp",
+				"${workspaceFolder}\\source\\*.cpp",
 				"-o",
 				"${workspaceFolder}\\bin\\RasterEngine.exe",
 
@@ -26,10 +26,17 @@
 				"-lShell32",
 				
 				//32bit binary
-				"-m32"
+				"-m32",
+
+				//c++17
+				"-std=c++17"
 			],
 			"options": {
-				"cwd": "${workspaceFolder}"
+				"cwd": "${workspaceFolder}",
+				"shell": {
+					"executable": "D:\\Cygwin\\bin\\mintty.exe",
+					"args": []
+				}
 			},
 			"problemMatcher": [
 				"$gcc"

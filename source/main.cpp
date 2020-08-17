@@ -1,7 +1,8 @@
 #define GLEW_STATIC
 #include "GL\glew.h"
 #include "GLFW\glfw3.h"
-#include <iostream>
+#include "masterInclude.hpp"
+
 
 int main(){
     GLFWwindow* window;
@@ -15,11 +16,11 @@ int main(){
         glfwTerminate();
         return -1;
     }
-
+    
     glfwMakeContextCurrent(window);
-    // if(glewInit() != GLEW_OK){
-    //     return -1;
-    // }
+    if(glewInit() != GLEW_OK){
+        return -1;
+    }
     
     std::cout << glGetString(GL_VERSION) << std::endl;
     while(!glfwWindowShouldClose(window)){
