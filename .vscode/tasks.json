@@ -11,14 +11,6 @@
 				"-o",
 				"${workspaceFolder}\\bin\\RasterEngine.exe",
 
-				/*Include Paths*/
-				"-I${workspaceFolder}\\dependencies",
-				"-I${workspaceFolder}\\dependencies\\IMGUI",
-				
-				/*Library Paths*/
-				"-L${workspaceFolder}\\dependencies\\GL",
-				"-L${workspaceFolder}\\dependencies\\GLFW",
-
 				/*Vendor Paths*/
 				"${workspaceFolder}\\dependencies\\IMGUI\\imgui.cpp",
 				"${workspaceFolder}\\dependencies\\IMGUI\\imgui_demo.cpp",
@@ -27,26 +19,34 @@
 				"${workspaceFolder}\\dependencies\\IMGUI\\imgui_impl_opengl3.cpp",
 				"${workspaceFolder}\\dependencies\\IMGUI\\imgui_widgets.cpp",
 
+				/*Include Paths*/
+				"-I${workspaceFolder}\\dependencies",
+				"-I${workspaceFolder}\\dependencies\\IMGUI",
+				
+				/*Library Paths*/
+				"-L${workspaceFolder}\\dependencies\\GL",
+				"-L${workspaceFolder}\\dependencies\\GLFW",
+
 				/*libraries*/
-				"-lglfw3",
 				"-lglew32s",
+				"-lglfw3",
 				"-lopengl32",
 				"-lUser32",
 				"-lGdi32",
 				"-lShell32",
 				
-				//32bit binary
-				"-m32",
-
-				//c++17
-				"-std=c++17"
+				//misc
+				"-DGLEW_STATIC",	//glew static	
+				"-O3",				//optimization
+				"-m32",				//32bit binary
+				"-std=c++17"		//c++17
 			],
 			"options": {
 				"cwd": "${workspaceFolder}",
-				"shell": {
-					"executable": "powershell.exe",
-					"args": []
-				}
+				// "shell": {
+				// 	"executable": "powershell.exe",
+				// 	"args": []
+				// }
 			},
 			"problemMatcher": [
 				"$gcc"
