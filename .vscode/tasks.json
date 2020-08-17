@@ -14,8 +14,11 @@
 				/*Include Paths*/
 				"-I${workspaceFolder}\\dependencies\\include",
 				
-				// /*Library Paths*/
+				/*Library Paths*/
 				"-L${workspaceFolder}\\dependencies\\libraries",
+
+				/*Vendor Paths*/
+				"${workspaceFolder}\\dependencies\\vendor\\imgui\\*.cpp",
 
 				/*libraries*/
 				"-lglfw3",
