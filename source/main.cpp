@@ -1,4 +1,5 @@
 #define GLEW_STATIC
+#define IMGUI_IMPL_OPENGL_LOADER_GLEW
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"
 #include "IMGUI/imgui.h"
