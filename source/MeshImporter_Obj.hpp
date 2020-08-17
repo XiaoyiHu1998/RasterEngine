@@ -1,14 +1,14 @@
-#ifndef IMPORTER_OBJ_HPP
-#define IMPORTER_OBJ_HPP
+#ifndef MESH_IMPORTER_OBJ_HPP
+#define MESH_IMPORTER_OBJ_HPP
 
 #include "masterInclude.hpp"
 
-class Importer_OBJ{
+class MeshImporter_OBJ{
 private:
 public:
-    Importer_OBJ();
+    MeshImporter_OBJ();
     // Model import(const std::string & path);
     // Model import(const std::vector<std::string> & paths);
 };
 
-#endif //IMPORTER_OBJ_HPP
+#endif //MESH_IMPORTER_OBJ_HPP
