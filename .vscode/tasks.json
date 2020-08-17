@@ -4,7 +4,8 @@
 		{
 			"type": "shell",
 			"label": "Build RasterEngine",
-			"command": "F:\\TDM-GCC\\bin\\g++.exe",
+			"command": "F:\\TDM-GCC\\bin\\g++.exe",			//desktop
+			// "command": "F:\\TDM-GCC\\bin\\g++.exe",  	//laptop
 			"args": [
 				"-g",
 				"${workspaceFolder}\\source\\main.cpp",
@@ -42,11 +43,7 @@
 				"-std=c++17"		//c++17
 			],
 			"options": {
-				"cwd": "${workspaceFolder}",
-				// "shell": {
-				// 	"executable": "powershell.exe",
-				// 	"args": []
-				// }
+				"cwd": "${workspaceFolder}"
 			},
 			"problemMatcher": [
 				"$gcc"

@@ -15,28 +15,8 @@
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
-            "miDebuggerPath": "F:\\TDM-GCC\\bin\\gdb.exe",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-            }
-            ],
-            "preLaunchTask": "Build RasterEngine"
-        },
-        {
-            "name": "g++.exe - Build RasterEngine",
-            "type": "cppdbg",
-            "request": "launch",
-            "program": "${workspaceFolder}\\bin\\RasterEngine.exe",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "miDebuggerPath": "F:\\TDM-GCC\\bin\\gdb.exe",
+            "miDebuggerPath": "F:\\TDM-GCC\\bin\\gdb.exe",      //desktop
+            // "miDebuggerPath": "F:\\TDM-GCC\\bin\\gdb.exe",   //laptop
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
