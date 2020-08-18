@@ -4,8 +4,9 @@
 #include <stdio.h>
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"
-#include "masterInclude.hpp"
 
+#include "masterInclude.hpp"
+#include "RasterEngine.hpp"
 
 int main(){
     //glfw init
@@ -40,7 +41,9 @@ int main(){
     bool show_demo_window = true;
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
-    
+    //main program init
+    RasterEngine rasterEngine = RasterEngine();
+
     //main loop
     std::cout << glGetString(GL_VERSION) << std::endl;
     while(!glfwWindowShouldClose(window)){
@@ -49,14 +52,15 @@ int main(){
         glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        //openGL rendering
+        //openGL rendering + main application
         glBegin(GL_TRIANGLES);
         glVertex2f(1.0f, -1.0f);
         glVertex2f(-1.0f, 1.0f);
         glVertex2f(1.0f, 1.0f);
         glEnd();
+        rasterEngine.tick();
 
-        //imgui frame
+        //imgui systemInfo
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
