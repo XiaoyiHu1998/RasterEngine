@@ -8,9 +8,9 @@
 
 class RasterEngine{
 private:
-    World world;
-    Renderer renderer;
-    MeshImporter_OBJ importer_obj;
+    // World world;
+    // Renderer renderer;
+    // MeshImporter_OBJ importer_obj;
     
     void update();
     void render();
