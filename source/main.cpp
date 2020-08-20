@@ -13,8 +13,8 @@ int main(){
     if(!glfwInit()){
         return -1;
     }
-    // glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    // glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
     GLFWwindow* window = glfwCreateWindow(WINDOW_RES_X, WINDOW_RES_Y, "RasterEngine.exe", NULL, NULL);
     if(!window){
         glfwTerminate();
@@ -42,7 +42,7 @@ int main(){
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
     //main program init
-    RasterEngine rasterEngine = RasterEngine();
+    // RasterEngine rasterEngine = RasterEngine();
 
     //main loop
     std::cout << glGetString(GL_VERSION) << std::endl;
@@ -58,7 +58,7 @@ int main(){
         glVertex2f(-1.0f, 1.0f);
         glVertex2f(1.0f, 1.0f);
         glEnd();
-        rasterEngine.tick();
+        // rasterEngine.tick();
 
         //imgui systemInfo
         ImGui_ImplOpenGL3_NewFrame();

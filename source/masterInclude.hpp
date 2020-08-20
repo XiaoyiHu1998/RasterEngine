@@ -1,10 +1,16 @@
 #ifndef MASTERINCLUDE_HPP
 #define MASTERINCLUDE_HPP
 
+#define NOMINMAX
+#include <windows.h>
+
 #include <thread>
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <string>
+
+#include "Primitives.hpp"
 
 #define WINDOW_RES_X 960
 #define WINDOW_RES_Y 540
