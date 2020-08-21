@@ -7,8 +7,7 @@
 class World{
 private:
 public:
-    World();
-    void init();
+    World(){}
 };
 
 #endif //WORLD_HPP

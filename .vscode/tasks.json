@@ -10,6 +10,12 @@
 				"-g",
 				"${workspaceFolder}\\source\\main.cpp",
 				"${workspaceFolder}\\source\\RasterEngine.cpp",
+<<<<<<< HEAD
+=======
+				"${workspaceFolder}\\source\\ImportManager.cpp",
+				"${workspaceFolder}\\source\\Importer_OBJ.cpp",
+				"${workspaceFolder}\\source\\PreMesh.cpp",
+>>>>>>> 68907d5815d8ed24b81d5f3bd3ae2b4617489c09
 				"-o",
 				"${workspaceFolder}\\bin\\RasterEngine.exe",
 
@@ -36,6 +42,7 @@
 				"-lUser32",
 				"-lGdi32",
 				"-lShell32",
+				"-lcomdlg32",
 				
 				//misc
 				"-DGLEW_STATIC",	//glew static	

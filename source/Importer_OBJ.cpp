@@ -1,77 +1,100 @@
 #include "Importer_OBJ.hpp"
 
 Importer_OBJ::Importer_OBJ(std::shared_ptr<World> worldPointer):
-    base{worldPointer}
+    Importer{worldPointer}
     {}
 
-Mesh Importer_OBJ::import() override {
+Mesh Importer_OBJ::import(const std::string& filepath) {
     std::fstream fs;
     std::string inputLine;
-    Mesh newMesh();
+    std::vector<PreMesh> preMeshes;
+    preMeshes.push_back(PreMesh());
+    mtlPresentForCurrentFile = false;
+    mtlFilePath = "";
+    materialName = "";
 
+    std::cout << "opening file" << std::endl;
     fs.open(filepath, std::fstream::in);
     if(fs.is_open()){
+        std::cout << "file opened" << std::endl;
         while(!fs.eof()){
+            std::cout << "getting line" << std::endl;
             std::getline(fs, inputLine);
-            handleInputLine(const std::string& inputLine, Mesh& mesh);
+            if(inputLine != std::string("")){
+                handleInputLine(inputLine, preMeshes);
+            }
         }
+        std::cout << "closing file" << std::endl;
         fs.close();
     }
+    std::cout << "import finished" << std::endl;
 }
 
-void Importer_OBJ::handleInputLine(const std::string& inputLine, PreMesh& preMesh){
-    std::vector<string> splitLine;
-    splitLine.reserve(5);
-    int previousSpace = 0;
-    int nextSpace = 0;
-    int splitLineIndex = 0;
+void Importer_OBJ::handleInputLine(const std::string& inputLine, std::vector<PreMesh>& preMeshes){
+    std::vector<std::string> splitLine;
+    splitLine.push_back(std::string("")); 
     int parameterCount = 0;
+    std::cout << "current line in file: " << inputLine << std::endl;
+    std::cout << "<==== Split ====>" << std::endl;
     for(int i = 0; i < inputLine.size(); i++){
         if(inputLine[i] == ' '){
-            previousSpace = nextSpace;
-            nextSpace = i;
             parameterCount++;
+            splitLine.push_back(std::string(""));
         }
-        splitLine[splitlineIndex] = inputLine.substr(previousSpace + 1, nextSpace - previousSpace);
+        else{
+            splitLine[splitLine.size() - 1] += inputLine[i];
+        };
     }
-
-    switch(splitLine){
-        case splitLine[0] == "#": //Comments
-            break;
-        case splitLine[0] == "v": //VertexPosition
-            mesh.setVertexPositionDimensions(parameterCount);
-            for(int j = 0; j < parameterCount; j++){
-                mesh.addVertexPosition(std::stof(splitLine[i + 1]));
-            }
-            break;
-        case splitLine[0] == "vt": // vertexTextureCoordinates
-            mesh.setVertexTextureCoordinateCount(parameterCount);
-            for(int j = 0; j < parameterCount; j++){
-                mesh.addVertexTexturePosition(std::stof(splitLine[i + 1]));
-            }
-            break;
-        case splitLine[0] == "vn": // vertexNormalCoordinates
-            mesh.setVertexNormalComponentCount(parameterCount);
-            for(int j = 0; j < parameterCount; j++){
-                mesh.addVertexNormalComponent(std::stof(splitLine[i + 1]));
-            }
-            break;
-        case splitLine[0] == "f":
-            if(parameterCount == 3){
-                for(int j = 0; j < 3; j++){
-                    parseVertexIndices(splitLine[j + 1], preMesh);
-                }
-            }
-            else if(paramter_count == 4){
-
-            }
-        case default:
-            std::cout << "unsupporterd obj file." << std::endl;
-            throw;
-            break;
+    for(int i = 0; i < splitLine.size(); i++){
+        std::cout << splitLine[i] << std::endl;
     }
-}
-
-std::vector<int> parseVertexIndices(const string& indices, PreMehs& preMesh){
-    std::vector 
+    std::cout << "====> split <====" << std::endl;
+    if(splitLine[0] == std::string("#")){
+        return;
+    }
+    else if(splitLine[0] == std::string("v")){
+        for(int j = 0; j < parameterCount; j++){
+            preMeshes[preMeshes.size()].addVertexPosition(std::stof(splitLine[j + 1]));
+        }
+    }
+    else if(splitLine[0] == std::string("vt")){
+        for(int j = 0; j < parameterCount; j++){
+            preMeshes[preMeshes.size()].addVertexTexturePosition(std::stof(splitLine[j + 1]));
+        }
+    }
+    else if(splitLine[0] == std::string("vn")){
+        for(int j = 0; j < parameterCount; j++){
+            preMeshes[preMeshes.size()].addVertexNormalComponent(std::stof(splitLine[j + 1]));
+        }
+    }
+    else if(splitLine[0] == std::string("f")){
+        if(parameterCount == 3){
+            preMeshes[preMeshes.size()].addTriangle(inputLine);
+        }
+        else if(parameterCount == 4){
+            preMeshes[preMeshes.size()].addQuad(inputLine);
+        }
+    }
+    else if(splitLine[0] == std::string("mtllib")){
+        mtlPresentForCurrentFile = true;
+        mtlFilePath = splitLine[1];
+    }
+    else if(splitLine[0] == std::string("usemtl")){
+        materialName = splitLine[1];
+    }
+    else if(splitLine[0] == std::string("o")){
+        preMeshes.push_back(PreMesh());
+    }
+    else if(splitLine[0] == std::string("s")){ 
+        if(splitLine[1] == std::string("off")){
+            
+        }
+        else{
+            // TODO: smoothinggroups
+        }
+    }
+    else{
+        std::cout << "unsupported obj file" << std::endl;
+        throw -1;
+    }
 }
