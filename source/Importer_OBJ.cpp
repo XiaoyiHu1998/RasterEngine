@@ -9,33 +9,46 @@ Mesh Importer_OBJ::import(const std::string& filepath) {
     std::string inputLine;
     std::vector<PreMesh> preMeshes;
     preMeshes.push_back(PreMesh());
+    mtlPresentForCurrentFile = false;
+    mtlFilePath = "";
+    materialName = "";
 
+    std::cout << "opening file" << std::endl;
     fs.open(filepath, std::fstream::in);
     if(fs.is_open()){
+        std::cout << "file opened" << std::endl;
         while(!fs.eof()){
+            std::cout << "getting line" << std::endl;
             std::getline(fs, inputLine);
-            handleInputLine(inputLine, preMeshes);
+            if(inputLine != std::string("")){
+                handleInputLine(inputLine, preMeshes);
+            }
         }
+        std::cout << "closing file" << std::endl;
         fs.close();
     }
+    std::cout << "import finished" << std::endl;
 }
 
 void Importer_OBJ::handleInputLine(const std::string& inputLine, std::vector<PreMesh>& preMeshes){
     std::vector<std::string> splitLine;
-    splitLine.reserve(5);
-    int previousSpace = 0;
-    int nextSpace = 0;
-    int splitLineIndex = 0;
+    splitLine.push_back(std::string("")); 
     int parameterCount = 0;
+    std::cout << "current line in file: " << inputLine << std::endl;
+    std::cout << "<==== Split ====>" << std::endl;
     for(int i = 0; i < inputLine.size(); i++){
         if(inputLine[i] == ' '){
-            previousSpace = nextSpace;
-            nextSpace = i;
             parameterCount++;
+            splitLine.push_back(std::string(""));
         }
-        splitLine[splitLineIndex] = inputLine.substr(previousSpace + 1, nextSpace - previousSpace);
+        else{
+            splitLine[splitLine.size() - 1] += inputLine[i];
+        };
     }
-
+    for(int i = 0; i < splitLine.size(); i++){
+        std::cout << splitLine[i] << std::endl;
+    }
+    std::cout << "====> split <====" << std::endl;
     if(splitLine[0] == std::string("#")){
         return;
     }
@@ -62,8 +75,23 @@ void Importer_OBJ::handleInputLine(const std::string& inputLine, std::vector<Pre
             preMeshes[preMeshes.size()].addQuad(inputLine);
         }
     }
+    else if(splitLine[0] == std::string("mtllib")){
+        mtlPresentForCurrentFile = true;
+        mtlFilePath = splitLine[1];
+    }
+    else if(splitLine[0] == std::string("usemtl")){
+        materialName = splitLine[1];
+    }
     else if(splitLine[0] == std::string("o")){
         preMeshes.push_back(PreMesh());
+    }
+    else if(splitLine[0] == std::string("s")){ 
+        if(splitLine[1] == std::string("off")){
+            
+        }
+        else{
+            // TODO: smoothinggroups
+        }
     }
     else{
         std::cout << "unsupported obj file" << std::endl;

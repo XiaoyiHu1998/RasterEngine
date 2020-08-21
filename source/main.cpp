@@ -42,7 +42,7 @@ int main(){
     ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
     //main program init
-    // RasterEngine rasterEngine = RasterEngine();
+    RasterEngine rasterEngine = RasterEngine();
 
     //main loop
     std::cout << glGetString(GL_VERSION) << std::endl;
@@ -58,6 +58,7 @@ int main(){
         glVertex2f(-1.0f, 1.0f);
         glVertex2f(1.0f, 1.0f);
         glEnd();
+        rasterEngine.openImportWindow();
         // rasterEngine.tick();
 
         //imgui systemInfo

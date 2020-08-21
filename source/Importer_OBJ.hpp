@@ -5,6 +5,9 @@
 
 class Importer_OBJ : public Importer{
 private:
+    bool mtlPresentForCurrentFile;
+    std::string mtlFilePath;
+    std::string materialName;
     void handleInputLine(const std::string& inputLine, std::vector<PreMesh>& preMeshes) override;
 public:
     Importer_OBJ(std::shared_ptr<World> worldPointer);

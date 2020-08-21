@@ -20,3 +20,7 @@ void RasterEngine::update(){
 void RasterEngine::render(){
     
 }
+
+void RasterEngine::openImportWindow(){
+    importManager.import();
+}

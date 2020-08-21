@@ -11,7 +11,7 @@ std::string ImportManager::getFilePath(){
         ZeroMemory(&toOpenFileName, sizeof(toOpenFileName));
         toOpenFileName.lStructSize  = sizeof(toOpenFileName);
         toOpenFileName.hwndOwner    = NULL; // TODO: add handle of the rasterEngine window later.
-        toOpenFileName.lpstrFilter  = "Text Files\0*.txt\0Any File\0*.*\0";
+        toOpenFileName.lpstrFilter  = "Obj Files\0*.obj\0Text Files\0*.txt\0Any File\0*.*\0";
         toOpenFileName.lpstrFile    = filepath_charArray;
         toOpenFileName.nMaxFile     = MAX_PATH;
         toOpenFileName.lpstrTitle   = "Choose a file to Import.";
@@ -48,13 +48,15 @@ void ImportManager::import(){
     std::string filepath = getFilePath();
 
     if(filepath != std::string("ERROR")){
-        std::string extension = filepath.substr(filepath.size() - 5, 4);
-        if(extension == std::string("obj")){
+        std::string extension = filepath.substr(filepath.size() - 4, 4);
+        std::cout << "path: " << filepath << std::endl;
+        std::cout << "file extension: " << extension << std::endl;
+        if(extension == std::string(".obj")){
             importer_obj.import(filepath);
         }
         else{
             std::cout << "unsupported filetype selected." << std::endl;
-            throw -1;
+            while(true){}
         }
     }
 }
