@@ -3,12 +3,14 @@
 
 #define NOMINMAX
 #include <windows.h>
+#undef NOMINMAX
 
 #include <thread>
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include <string>
+#include <functional>
 
 #include "Primitives.hpp"
 

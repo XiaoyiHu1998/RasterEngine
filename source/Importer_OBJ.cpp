@@ -1,26 +1,27 @@
 #include "Importer_OBJ.hpp"
 
 Importer_OBJ::Importer_OBJ(std::shared_ptr<World> worldPointer):
-    base{worldPointer}
+    Importer{worldPointer}
     {}
 
-Mesh Importer_OBJ::import() override {
+Mesh Importer_OBJ::import(const std::string& filepath) {
     std::fstream fs;
     std::string inputLine;
-    Mesh newMesh();
+    std::vector<PreMesh> preMeshes;
+    preMeshes.push_back(PreMesh());
 
     fs.open(filepath, std::fstream::in);
     if(fs.is_open()){
         while(!fs.eof()){
             std::getline(fs, inputLine);
-            handleInputLine(const std::string& inputLine, Mesh& mesh);
+            handleInputLine(inputLine, preMeshes);
         }
         fs.close();
     }
 }
 
-void Importer_OBJ::handleInputLine(const std::string& inputLine, PreMesh& preMesh){
-    std::vector<string> splitLine;
+void Importer_OBJ::handleInputLine(const std::string& inputLine, std::vector<PreMesh>& preMeshes){
+    std::vector<std::string> splitLine;
     splitLine.reserve(5);
     int previousSpace = 0;
     int nextSpace = 0;
@@ -32,46 +33,40 @@ void Importer_OBJ::handleInputLine(const std::string& inputLine, PreMesh& preMes
             nextSpace = i;
             parameterCount++;
         }
-        splitLine[splitlineIndex] = inputLine.substr(previousSpace + 1, nextSpace - previousSpace);
+        splitLine[splitLineIndex] = inputLine.substr(previousSpace + 1, nextSpace - previousSpace);
     }
 
-    switch(splitLine){
-        case splitLine[0] == "#": //Comments
-            break;
-        case splitLine[0] == "v": //VertexPosition
-            mesh.setVertexPositionDimensions(parameterCount);
-            for(int j = 0; j < parameterCount; j++){
-                mesh.addVertexPosition(std::stof(splitLine[i + 1]));
-            }
-            break;
-        case splitLine[0] == "vt": // vertexTextureCoordinates
-            mesh.setVertexTextureCoordinateCount(parameterCount);
-            for(int j = 0; j < parameterCount; j++){
-                mesh.addVertexTexturePosition(std::stof(splitLine[i + 1]));
-            }
-            break;
-        case splitLine[0] == "vn": // vertexNormalCoordinates
-            mesh.setVertexNormalComponentCount(parameterCount);
-            for(int j = 0; j < parameterCount; j++){
-                mesh.addVertexNormalComponent(std::stof(splitLine[i + 1]));
-            }
-            break;
-        case splitLine[0] == "f":
-            if(parameterCount == 3){
-                for(int j = 0; j < 3; j++){
-                    parseVertexIndices(splitLine[j + 1], preMesh);
-                }
-            }
-            else if(paramter_count == 4){
-
-            }
-        case default:
-            std::cout << "unsupporterd obj file." << std::endl;
-            throw;
-            break;
+    if(splitLine[0] == std::string("#")){
+        return;
     }
-}
-
-std::vector<int> parseVertexIndices(const string& indices, PreMehs& preMesh){
-    std::vector 
+    else if(splitLine[0] == std::string("v")){
+        for(int j = 0; j < parameterCount; j++){
+            preMeshes[preMeshes.size()].addVertexPosition(std::stof(splitLine[j + 1]));
+        }
+    }
+    else if(splitLine[0] == std::string("vt")){
+        for(int j = 0; j < parameterCount; j++){
+            preMeshes[preMeshes.size()].addVertexTexturePosition(std::stof(splitLine[j + 1]));
+        }
+    }
+    else if(splitLine[0] == std::string("vn")){
+        for(int j = 0; j < parameterCount; j++){
+            preMeshes[preMeshes.size()].addVertexNormalComponent(std::stof(splitLine[j + 1]));
+        }
+    }
+    else if(splitLine[0] == std::string("f")){
+        if(parameterCount == 3){
+            preMeshes[preMeshes.size()].addTriangle(inputLine);
+        }
+        else if(parameterCount == 4){
+            preMeshes[preMeshes.size()].addQuad(inputLine);
+        }
+    }
+    else if(splitLine[0] == std::string("o")){
+        preMeshes.push_back(PreMesh());
+    }
+    else{
+        std::cout << "unsupported obj file" << std::endl;
+        throw -1;
+    }
 }

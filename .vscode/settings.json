@@ -37,6 +37,11 @@
         "xtr1common": "cpp",
         "xutility": "cpp",
         "fstream": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "cctype": "cpp",
+        "chrono": "cpp",
+        "ratio": "cpp",
+        "thread": "cpp",
+        "vector": "cpp"
     }
 }

@@ -1,8 +1,9 @@
 #include "RasterEngine.hpp"
 
-RasterEngine::RasterEngine(){
-
-}
+RasterEngine::RasterEngine():
+    world{World()},
+    importManager{ImportManager(std::make_shared<World>(world))}
+    {}
 
 void RasterEngine::reset(){
 

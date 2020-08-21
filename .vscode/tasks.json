@@ -9,6 +9,10 @@
 			"args": [
 				"-g",
 				"${workspaceFolder}\\source\\main.cpp",
+				"${workspaceFolder}\\source\\RasterEngine.cpp",
+				"${workspaceFolder}\\source\\ImportManager.cpp",
+				"${workspaceFolder}\\source\\Importer_OBJ.cpp",
+				"${workspaceFolder}\\source\\PreMesh.cpp",
 				"-o",
 				"${workspaceFolder}\\bin\\RasterEngine.exe",
 
@@ -35,6 +39,7 @@
 				"-lUser32",
 				"-lGdi32",
 				"-lShell32",
+				"-lcomdlg32",
 				
 				//misc
 				"-DGLEW_STATIC",	//glew static	
