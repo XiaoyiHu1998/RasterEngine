@@ -56,12 +56,7 @@ int main(){
         //imgui systemInfo
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
-        ImGui::Begin("System Info");
-        ImGui::Text("%.1f FPS", ImGui::GetIO().Framerate);
-        ImGui::Text("%.3f ms", 1000.0f / ImGui::GetIO().Framerate);
-        ImGui::End();
-        rasterEngine.importWindow();
+        rasterEngine.renderUI();
 
         //render imgui overlay
         ImGui::Render();

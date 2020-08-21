@@ -56,7 +56,6 @@ void ImportManager::import(){
         }
         else{
             std::cout << "unsupported filetype selected." << std::endl;
-            while(true){}
         }
     }
 }

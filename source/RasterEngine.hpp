@@ -20,7 +20,7 @@ public:
     RasterEngine();
     void reset();
     void tick();
-    void importWindow();
+    void renderUI();
 };
 
 #endif //RASTER_ENGINE_HPP
