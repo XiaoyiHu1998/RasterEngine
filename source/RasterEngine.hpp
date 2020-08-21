@@ -12,6 +12,7 @@ private:
     // Renderer renderer;
     // MeshImporter_OBJ importer_obj;
     ImportManager importManager;
+    bool importFile;
     
     void update();
     void render();
@@ -19,7 +20,7 @@ public:
     RasterEngine();
     void reset();
     void tick();
-    void openImportWindow();
+    void importWindow();
 };
 
 #endif //RASTER_ENGINE_HPP

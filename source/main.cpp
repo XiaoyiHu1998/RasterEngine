@@ -1,10 +1,3 @@
-#include "IMGUI/imgui.h"
-#include "IMGUI/imgui_impl_glfw.h"
-#include "IMGUI/imgui_impl_opengl3.h"
-#include <stdio.h>
-#include "GL/glew.h"
-#include "GLFW/glfw3.h"
-
 #include "masterInclude.hpp"
 #include "RasterEngine.hpp"
 
@@ -58,7 +51,6 @@ int main(){
         glVertex2f(-1.0f, 1.0f);
         glVertex2f(1.0f, 1.0f);
         glEnd();
-        rasterEngine.openImportWindow();
         // rasterEngine.tick();
 
         //imgui systemInfo
@@ -69,6 +61,7 @@ int main(){
         ImGui::Text("%.1f FPS", ImGui::GetIO().Framerate);
         ImGui::Text("%.3f ms", 1000.0f / ImGui::GetIO().Framerate);
         ImGui::End();
+        rasterEngine.importWindow();
 
         //render imgui overlay
         ImGui::Render();

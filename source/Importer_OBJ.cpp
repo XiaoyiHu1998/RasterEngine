@@ -18,7 +18,7 @@ Mesh Importer_OBJ::import(const std::string& filepath) {
     if(fs.is_open()){
         std::cout << "file opened" << std::endl;
         while(!fs.eof()){
-            std::cout << "getting line" << std::endl;
+            // std::cout << "getting line" << std::endl;
             std::getline(fs, inputLine);
             if(inputLine != std::string("")){
                 handleInputLine(inputLine, preMeshes);
@@ -34,8 +34,8 @@ void Importer_OBJ::handleInputLine(const std::string& inputLine, std::vector<Pre
     std::vector<std::string> splitLine;
     splitLine.push_back(std::string("")); 
     int parameterCount = 0;
-    std::cout << "current line in file: " << inputLine << std::endl;
-    std::cout << "<==== Split ====>" << std::endl;
+    // std::cout << "current line in file: " << inputLine << std::endl;
+    // std::cout << "<==== Split ====>" << std::endl;
     for(int i = 0; i < inputLine.size(); i++){
         if(inputLine[i] == ' '){
             parameterCount++;
@@ -45,34 +45,42 @@ void Importer_OBJ::handleInputLine(const std::string& inputLine, std::vector<Pre
             splitLine[splitLine.size() - 1] += inputLine[i];
         };
     }
-    for(int i = 0; i < splitLine.size(); i++){
-        std::cout << splitLine[i] << std::endl;
-    }
-    std::cout << "====> split <====" << std::endl;
+    // for(int i = 0; i < splitLine.size(); i++){
+    //     std::cout << splitLine[i] << std::endl;
+    // }
+    // std::cout << "====> split <====" << std::endl;
+
+    #define CURRENT_PREMESH preMeshes[preMeshes.size() - 1]
     if(splitLine[0] == std::string("#")){
         return;
     }
     else if(splitLine[0] == std::string("v")){
         for(int j = 0; j < parameterCount; j++){
-            preMeshes[preMeshes.size()].addVertexPosition(std::stof(splitLine[j + 1]));
+            CURRENT_PREMESH.addVertexPosition(std::stof(splitLine[j + 1]));
         }
     }
     else if(splitLine[0] == std::string("vt")){
         for(int j = 0; j < parameterCount; j++){
-            preMeshes[preMeshes.size()].addVertexTexturePosition(std::stof(splitLine[j + 1]));
+            CURRENT_PREMESH.addVertexTexturePosition(std::stof(splitLine[j + 1]));
         }
     }
     else if(splitLine[0] == std::string("vn")){
         for(int j = 0; j < parameterCount; j++){
-            preMeshes[preMeshes.size()].addVertexNormalComponent(std::stof(splitLine[j + 1]));
+            CURRENT_PREMESH.addVertexNormalComponent(std::stof(splitLine[j + 1]));
         }
+    }
+    else if(splitLine[0] == std::string("p")){
+        CURRENT_PREMESH.addPoint(inputLine);
+    }
+    else if(splitLine[0] == std::string("l")){
+        CURRENT_PREMESH.addLine(inputLine);
     }
     else if(splitLine[0] == std::string("f")){
         if(parameterCount == 3){
-            preMeshes[preMeshes.size()].addTriangle(inputLine);
+            CURRENT_PREMESH.addTriangle(inputLine);
         }
         else if(parameterCount == 4){
-            preMeshes[preMeshes.size()].addQuad(inputLine);
+            CURRENT_PREMESH.addQuad(inputLine);
         }
     }
     else if(splitLine[0] == std::string("mtllib")){
@@ -87,7 +95,7 @@ void Importer_OBJ::handleInputLine(const std::string& inputLine, std::vector<Pre
     }
     else if(splitLine[0] == std::string("s")){ 
         if(splitLine[1] == std::string("off")){
-            
+            // TODO: no smoothinggroups
         }
         else{
             // TODO: smoothinggroups
@@ -97,4 +105,6 @@ void Importer_OBJ::handleInputLine(const std::string& inputLine, std::vector<Pre
         std::cout << "unsupported obj file" << std::endl;
         throw -1;
     }
+
+    #undef CURRENT_PREMESH
 }
