@@ -4,11 +4,12 @@
 		{
 			"type": "shell",
 			"label": "Build RasterEngine",
-			// "command": "F:\\TDM-GCC\\bin\\g++.exe",			//desktop
-			"command": "C:\\MinGW\\bin\\g++.exe",  	//laptop
+			"command": "F:\\TDM-GCC\\bin\\g++.exe",			//desktop
+			// "command": "C:\\MinGW\\bin\\g++.exe",  	//laptop
 			"args": [
 				"-g",
 				"${workspaceFolder}\\source\\main.cpp",
+				"${workspaceFolder}\\source\\RasterEngine.cpp",
 				"-o",
 				"${workspaceFolder}\\bin\\RasterEngine.exe",
 
