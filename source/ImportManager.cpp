@@ -10,11 +10,11 @@ std::string ImportManager::getFilePath(){
         ZeroMemory(&filepath_charArray, sizeof(filepath_charArray));
         ZeroMemory(&toOpenFileName, sizeof(toOpenFileName));
         toOpenFileName.lStructSize  = sizeof(toOpenFileName);
-        toOpenFileName.hwndOwner    = NULL; // TODO: add handle of the rasterEngine window later.
-        toOpenFileName.lpstrFilter  = "Obj Files\0*.obj\0Text Files\0*.txt\0Any File\0*.*\0";
         toOpenFileName.lpstrFile    = filepath_charArray;
         toOpenFileName.nMaxFile     = MAX_PATH;
+        toOpenFileName.hwndOwner    = NULL; // TODO: add handle of the rasterEngine window later.
         toOpenFileName.lpstrTitle   = "Choose a file to Import.";
+        toOpenFileName.lpstrFilter  = "Obj Files\0*.obj\0Text Files\0*.txt\0Any File\0*.*\0";
         toOpenFileName.Flags        = OFN_FILEMUSTEXIST | OFN_DONTADDTORECENT;
 
         if(!GetOpenFileName(&toOpenFileName)){

@@ -25,11 +25,14 @@ void RasterEngine::render(){
 void RasterEngine::renderUI(){
     ImGui::NewFrame();
     ImGui::Begin("RasterEngine");
+    // ImGui::DockSpace();
     ImGui::Text("%.1f FPS", ImGui::GetIO().Framerate);
     ImGui::Text("%.3f ms", 1000.0f / ImGui::GetIO().Framerate);
     if(ImGui::Button("import file")){
         importManager.import();
     }
     ImGui::End();
+    static bool showDemoWindow = true;
+    ImGui::ShowDemoWindow(&showDemoWindow);
 
 }
