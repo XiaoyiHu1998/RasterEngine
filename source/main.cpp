@@ -26,6 +26,8 @@ int main(){
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     //io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
     //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
+    // io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Viewports outside of main window
     ImGui::StyleColorsDark();
 
     const char* glsl_version = "#version 130";
@@ -60,6 +62,7 @@ int main(){
 
         //render imgui overlay
         ImGui::Render();
+        ImGui::UpdatePlatformWindows();
         int display_w, display_h;
         glViewport(0, 0, display_w, display_h);
         glfwGetFramebufferSize(window, &display_w, &display_h);
