@@ -13,6 +13,8 @@ private:
     // MeshImporter_OBJ importer_obj;
     ImportManager importManager;
     bool importFile;
+    bool systemInfo;
+    bool viewport;
     
     void update();
     void render();
