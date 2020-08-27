@@ -15,6 +15,7 @@ private:
 public:
     RasterEngine(GLFWwindow* window);
     void draw();
+    void drawSceneToTexture();
 };
 
 #endif //RASTER_ENGINE_HPP

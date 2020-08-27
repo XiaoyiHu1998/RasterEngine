@@ -41,6 +41,9 @@ int main(){
     //main loop
     std::cout << glGetString(GL_VERSION) << std::endl;
     while(!glfwWindowShouldClose(window)){
+
+        rasterEngine.drawSceneToTexture();
+        
         //imgui systemInfo
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();

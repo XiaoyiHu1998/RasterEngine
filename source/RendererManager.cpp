@@ -9,8 +9,12 @@ void RendererManager::init(){
     scene.createFrameBuffer();
 }
 
+void RendererManager::renderScene(){
+    colorTexture = scene.renderScene();
+}
+
 void RendererManager::renderProgramWindow(){
-    scene.setRenderResolution(ui.getViewportSize());
-    ui.drawWindows(scene.renderScene());
+    // scene.setRenderResolution(ui.getViewportSize());
+    ui.drawWindows(colorTexture);
     ui.drawImGui();
 }
