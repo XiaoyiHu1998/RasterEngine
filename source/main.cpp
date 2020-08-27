@@ -34,39 +34,17 @@ int main(){
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init(glsl_version);
     bool show_demo_window = true;
-    ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
     //main program init
-    RasterEngine rasterEngine = RasterEngine();
+    RasterEngine rasterEngine(window);
 
     //main loop
     std::cout << glGetString(GL_VERSION) << std::endl;
     while(!glfwWindowShouldClose(window)){
-
-        //clear framebuffer
-        glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        //openGL rendering + main application
-        glBegin(GL_TRIANGLES);
-        glVertex2f(1.0f, -1.0f);
-        glVertex2f(-1.0f, 1.0f);
-        glVertex2f(1.0f, 1.0f);
-        glEnd();
-        // rasterEngine.tick();
-
         //imgui systemInfo
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
-        rasterEngine.renderUI();
-
-        //render imgui overlay
-        ImGui::Render();
-        ImGui::UpdatePlatformWindows();
-        int display_w, display_h;
-        glViewport(0, 0, display_w, display_h);
-        glfwGetFramebufferSize(window, &display_w, &display_h);
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        rasterEngine.draw();
 
         //swap buffers
         glfwSwapBuffers(window);

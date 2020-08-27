@@ -3,7 +3,7 @@
 
 struct vector2f{
     float x, y;
-    vector2f(float x, float y){
+    vector2f(float x = 0, float y = 0){
         x = x;
         y = y;
     }
@@ -11,7 +11,7 @@ struct vector2f{
 
 struct vector2i{
     int x, y;
-    vector2i(int x, int y){
+    vector2i(int x = 0, int y = 0){
         x = x;
         y = y;
     }
@@ -19,7 +19,7 @@ struct vector2i{
 
 struct vector3f{
     float x, y, z;
-    vector3f(float x, float y, float z){
+    vector3f(float x = 0, float y = 0, float z = 0){
         x = x;
         y = y;
         z = z;
@@ -28,7 +28,7 @@ struct vector3f{
 
 struct vector3i{
     int x, y, z;
-    vector3i(int x, int y, int z){
+    vector3i(int x = 0, int y = 0, int z = 0){
         x = x;
         y = y;
         z = z;

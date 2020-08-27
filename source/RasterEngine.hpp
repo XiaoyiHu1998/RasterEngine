@@ -3,26 +3,18 @@
 
 #include "masterInclude.hpp"
 #include "World.hpp"
-#include "Renderer.hpp"
+#include "RendererManager.hpp"
 #include "ImportManager.hpp"
 
 class RasterEngine{
 private:
     World world;
-    // Renderer renderer;
-    // MeshImporter_OBJ importer_obj;
     ImportManager importManager;
-    bool importFile;
-    bool systemInfo;
-    bool viewport;
+    RendererManager rendererManager;
     
-    void update();
-    void render();
 public:
-    RasterEngine();
-    void reset();
-    void tick();
-    void renderUI();
+    RasterEngine(GLFWwindow* window);
+    void draw();
 };
 
 #endif //RASTER_ENGINE_HPP
