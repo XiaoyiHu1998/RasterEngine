@@ -9,10 +9,12 @@ private:
     unsigned int frameBuffer;
     unsigned int colorTexture;
     unsigned int renderBuffer;
-    vector2i renderResolution;
+    
+    int screenWidth;
+    int screenHeight;
 public:
     SceneRenderer(std::shared_ptr<World> worldPointer);
-    void init();
+    void createFrameBuffer();
     void setRenderResolution(ImVec2 viewportSize);
     unsigned int renderScene();
 };

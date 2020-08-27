@@ -10,6 +10,7 @@ private:
     UIRenderer ui;
 public:
     RendererManager(GLFWwindow* window, std::shared_ptr<World> worldPointer, std::shared_ptr<ImportManager> importManagerPointer);
+    void init();
     void renderProgramWindow();
 };
 

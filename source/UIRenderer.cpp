@@ -90,8 +90,8 @@ void UIRenderer::drawWindows(unsigned int colorTexture){
 void UIRenderer::draw3DViewport(unsigned int colorTexture){
     ImGui::Begin("3D Viewport");
         ImGui::BeginChild("FrameBuffer");
-        ImVec2 windowSizeVector = ImGui::GetWindowSize();
-        ImGui::Image((ImTextureID)colorTexture, windowSizeVector, ImVec2(0, 1), ImVec2(1, 0));
+        viewportSize = ImGui::GetWindowSize();
+        ImGui::Image((ImTextureID)colorTexture, viewportSize, ImVec2(0, 1), ImVec2(1, 0));
         ImGui::EndChild();
     ImGui::End();
 }
@@ -104,4 +104,8 @@ void UIRenderer::drawImGui(){
     glViewport(0, 0, display_w, display_h);
     glfwGetFramebufferSize(window, &display_w, &display_h);
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+
+ImVec2 UIRenderer::getViewportSize(){
+    return viewportSize;
 }
