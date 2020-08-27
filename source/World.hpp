@@ -6,6 +6,7 @@
 
 class World{
 private:
+    std::vector<Mesh> meshVector;
 public:
     World(){}
 };
