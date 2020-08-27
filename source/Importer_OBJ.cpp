@@ -103,7 +103,6 @@ void Importer_OBJ::handleInputLine(const std::string& inputLine, std::vector<Pre
     }
     else{
         std::cout << "unsupported obj file" << std::endl;
-        throw -1;
     }
 
     #undef CURRENT_PREMESH
