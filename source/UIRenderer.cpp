@@ -103,18 +103,14 @@ void UIRenderer::drawOpenWindows(unsigned int colorTexture){
 void UIRenderer::draw3DViewport(unsigned int colorTexture){
     ImGui::Begin("3D Viewport");
         ImGui::BeginChild("FrameBuffer");
-            // ImGui::BeginChild("Performance");
-            // ImGui::EndChild();
             viewportSize = ImGui::GetWindowSize();
             ImGui::Image((ImTextureID)colorTexture, viewportSize, ImVec2(0, 1), ImVec2(1, 0));
+            
             ImGui::SetCursorPos(ImVec2(10, 5));
             ImGui::Text("%.1f fps", ImGui::GetIO().Framerate);
             ImGui::SetCursorPos(ImVec2(10, 15));
             ImGui::Text("%.3f ms", 1000.0f / ImGui::GetIO().Framerate);
         ImGui::EndChild();
-        
-        static bool windowOpen = true;
-        ImGuiWindowFlags overlayWindowFlags = ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoFocusOnAppearing | ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoMove;
         
     ImGui::End();
 }
