@@ -3,90 +3,101 @@
 UIRenderer::UIRenderer(GLFWwindow* window, std::shared_ptr<ImportManager> importManagerPointer):
     window{window},
     importFile{false},
+    sceneViewport{true},
+    outliner{true},
+    properties{true},
     systemInfo{false},
-    sceneViewport{false},
     importManagerPointer{importManagerPointer}
     {}
 
-void UIRenderer::drawWindows(unsigned int colorTexture){
+void UIRenderer::drawUI(unsigned int colorTexture){
     ImGui::NewFrame();
 
-    // static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
-    // static bool dockspaceOpen = true;
+    static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
+    static bool dockspaceOpen = true;
 
-    // // We are using the ImGuiWindowFlags_NoDocking flag to make the parent window not dockable into,
-    // // because it would be confusing to have two docking targets within each others.
-    // ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
-    // ImGuiViewport* viewport_ImGui = ImGui::GetMainViewport();
-    // ImGui::SetNextWindowPos(viewport_ImGui->GetWorkPos());
-    // ImGui::SetNextWindowSize(viewport_ImGui->GetWorkSize());
-    // ImGui::SetNextWindowViewport(viewport_ImGui->ID);
-    // ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
-    // ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
-    // window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
-    // window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
+    ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
+    ImGuiViewport* viewport_ImGui = ImGui::GetMainViewport();
+    ImGui::SetNextWindowPos(viewport_ImGui->GetWorkPos());
+    ImGui::SetNextWindowSize(viewport_ImGui->GetWorkSize());
+    ImGui::SetNextWindowViewport(viewport_ImGui->ID);
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+    window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+    window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
     
+    if (dockspace_flags & ImGuiDockNodeFlags_PassthruCentralNode){
+        window_flags |= ImGuiWindowFlags_NoBackground;
+    }
 
-    // // When using ImGuiDockNodeFlags_PassthruCentralNode, DockSpace() will render our background
-    // // and handle the pass-thru hole, so we ask Begin() to not render a background.
-    // if (dockspace_flags & ImGuiDockNodeFlags_PassthruCentralNode){
-    //     window_flags |= ImGuiWindowFlags_NoBackground;
-    // }
+    // Important: keep maindockspace always open
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+    ImGui::Begin("DockSpace Demo", &dockspaceOpen, window_flags);
+    ImGui::PopStyleVar();
+    ImGui::PopStyleVar(2);
 
-    // // Important: note that we proceed even if Begin() returns false (aka window is collapsed).
-    // // This is because we want to keep our DockSpace() active. If a DockSpace() is inactive,
-    // // all active windows docked into it will lose their parent and become undocked.
-    // // We cannot preserve the docking relationship between an active window and an inactive docking, otherwise
-    // // any change of dockspace/settings would lead to windows being stuck in limbo and never being visible.
-    // ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
-    // ImGui::Begin("DockSpace Demo", &dockspaceOpen, window_flags);
-    // ImGui::PopStyleVar();
+    // Main dockspace, this is where all our windows are drawn
+    ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
+    ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
 
-    // ImGui::PopStyleVar(2);
+        drawMainMenuBar();
+        drawOpenWindows(colorTexture);
 
-    // // DockSpace
-    // ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
-    // ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
+    ImGui::End();
+}
 
-    //     if(ImGui::BeginMainMenuBar()){
-    //         if(ImGui::BeginMenu("File")){
-    //             if(ImGui::MenuItem("import file")){
-    //                 importFile = true;
-    //             }
-    //             ImGui::EndMenu();
-    //         }
-    //         if(ImGui::BeginMenu("Windows")){
-    //             if(ImGui::MenuItem("3D Viewport")){
-    //                 sceneViewport = !sceneViewport;
-    //             }
-    //             ImGui::EndMenu();
-    //         }
-    //         if(ImGui::BeginMenu("System")){
-    //             if(ImGui::MenuItem("System Info")){
-    //                 systemInfo = !systemInfo;
-    //             }
-    //             ImGui::EndMenu();
-    //         }
-    //         ImGui::EndMainMenuBar();
-    //     }
+void UIRenderer::drawMainMenuBar(){
+    if(ImGui::BeginMenuBar()){
+        if(ImGui::BeginMenu("File")){
+            if(ImGui::MenuItem("import file")){
+                importFile = true;
+            }
+            ImGui::EndMenu();
+        }
+        if(ImGui::BeginMenu("Windows")){
+            if(ImGui::MenuItem("3D Viewport")){
+                sceneViewport = !sceneViewport;
+            }
+            if(ImGui::MenuItem("Outliner")){
+                outliner = !outliner;
+            }
+            if(ImGui::MenuItem("Properties")){
+                properties = !properties;
+            }
+            ImGui::EndMenu();
+        }
+        if(ImGui::BeginMenu("System")){
+            if(ImGui::MenuItem("System Info")){
+                systemInfo = !systemInfo;
+            }
+            ImGui::EndMenu();
+        }
+        ImGui::EndMenuBar();
+    }
+}
 
-    //     if(importFile){
-    //         importFile = false;
-    //         importManagerPointer->import();
-    //     }
-    //     if(systemInfo){
-    //         ImGui::Begin("System");
-    //         ImGui::Text("%.1f FPS", ImGui::GetIO().Framerate);
-    //         ImGui::Text("%.3f ms", 1000.0f / ImGui::GetIO().Framerate);
-    //         ImGui::End();
-    //     }
-    //     if(sceneViewport){
-    //         draw3DViewport(colorTexture);
-    //     }
-        
-    // ImGui::End();
-    static bool showDemo = true;
-    ImGui::ShowDemoWindow(&showDemo);
+void UIRenderer::drawOpenWindows(unsigned int colorTexture){
+    if(importFile){
+        importFile = false;
+        importManagerPointer->import();
+    }
+    if(sceneViewport){
+        draw3DViewport(colorTexture);
+    }
+    if(outliner){
+        ImGui::Begin("Outliner");
+        ImGui::End();
+    }
+    if(properties){
+        ImGui::Begin("Properties");
+        ImGui::End();
+    }
+    if(systemInfo){
+        ImGui::Begin("System");
+        ImGui::Text("%.1f FPS", ImGui::GetIO().Framerate);
+        ImGui::Text("%.3f ms", 1000.0f / ImGui::GetIO().Framerate);
+        ImGui::End();
+    }
 }
 
 void UIRenderer::draw3DViewport(unsigned int colorTexture){
@@ -98,8 +109,8 @@ void UIRenderer::draw3DViewport(unsigned int colorTexture){
     ImGui::End();
 }
 
-void UIRenderer::drawImGui(){
-    //render imgui overlay
+void UIRenderer::drawToScreen(){
+    //render imgui overlay to glfw window
     ImGui::Render();
     ImGui::UpdatePlatformWindows();
     int display_w, display_h;

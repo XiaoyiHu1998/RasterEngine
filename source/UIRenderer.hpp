@@ -7,18 +7,22 @@
 class UIRenderer{
 private:
     GLFWwindow* window;
-    bool sceneViewport;
-    bool systemInfo;
     bool importFile;
+    bool sceneViewport;
+    bool outliner;
+    bool properties;
+    bool systemInfo;
 
     std::shared_ptr<ImportManager> importManagerPointer;
     ImVec2 viewportSize;
 
-    void draw3DViewport(unsigned int colorTextures);
+    void drawMainMenuBar();
+    void drawOpenWindows(unsigned int colorTexture);
+    void draw3DViewport(unsigned int colorTexture);
 public:
     UIRenderer(GLFWwindow* window, std::shared_ptr<ImportManager> importManagerPointer);
-    void drawWindows(unsigned int colorTexture);
-    void drawImGui();
+    void drawUI(unsigned int colorTexture);
+    void drawToScreen();
     ImVec2 getViewportSize();
 };
 

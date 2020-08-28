@@ -3,64 +3,78 @@
 SceneRenderer::SceneRenderer(std::shared_ptr<World> worldPointer):
     worldPointer{worldPointer},
     screenWidth{640},
-    screenHeight{480}
+    screenHeight{480},
+    clear_color{ImVec4(0.45f, 0.55f, 0.60f, 1.00f)}
     {}
 
 
 void SceneRenderer::createFrameBuffer(){
-    // glGenFramebuffers(1, &frameBuffer);
-    // glGenTextures(1, &colorTexture);
-    // glGenRenderbuffers(1, &renderBuffer);
+    //create buffer, texture and renderbuffer object
+    glGenFramebuffers(1, &frameBuffer);
+    glGenTextures(1, &colorTexture);
+    glGenRenderbuffers(1, &renderBuffer);
 
-    // //bind frameBuffer
-    // // glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
+    //bind frameBuffer
+    glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
 
-    // //create and bind colorTexture
-    // // glBindTexture(GL_TEXTURE_2D, colorTexture);
-    // glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, screenWidth, screenHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
-    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    // // glBindTexture(GL_TEXTURE_2D, 0);
-    // // glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorTexture, 0);
+    //create and bind colorTexture
+    glBindTexture(GL_TEXTURE_2D, colorTexture);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, screenWidth, screenHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorTexture, 0);
 
-    // create and bind renderBuffer object
-    // glBindRenderbuffer(GL_RENDERBUFFER, renderBuffer);
-    // glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, screenWidth, screenHeight);
-    // glBindRenderbuffer(GL_RENDERBUFFER, 0);
-    // glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, renderBuffer);
+    //create and bind renderBuffer object
+    glBindRenderbuffer(GL_RENDERBUFFER, renderBuffer);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, screenWidth, screenHeight);
+    glBindRenderbuffer(GL_RENDERBUFFER, 0);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, renderBuffer);
 
-    // if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE){
-    //     std::cout << "error: framebuffer not initialized properly" << std::endl;
-    // }
+    if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE){
+        std::cout << "error: framebuffer not initialized properly" << std::endl;
+    }
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void SceneRenderer::setRenderResolution(ImVec2 viewportSize){
-    screenWidth = (int)viewportSize.x;
-    screenHeight = (int)viewportSize.y;
+void SceneRenderer::bindFrameBuffer(){
+    glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
+}
+void SceneRenderer::unbindFrameBuffer(){
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 
 unsigned int SceneRenderer::renderScene(){
-    //render if framebuffer complete
+    //render to right buffer
+    bindFrameBuffer();
+
+    //render if framebuffer is complete
     if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE){
         std::cout << "framebuffer status: " << glCheckFramebufferStatus(GL_FRAMEBUFFER);
     }
     else{
-        
-        ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+        if(clear_color.y < 1.00f){
+            clear_color.y += 0.003f;
+        }
+        else{
+            clear_color.y = 0.00f;
+        }
         glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
         // glClearColor(0,0,0,0);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glColor3f(1.0f, 1.0f, 1.0f);
+        // glColor3f(1.0f, 1.0f, 1.0f);
         glBegin(GL_TRIANGLES);
-        glVertex2f(1.0f, -1.0f);
-        glVertex2f(-1.0f, 1.0f);
-        glVertex2f(1.0f, 1.0f);
+        glVertex2f(0.5f, 0.7f);
+        glVertex2f(-0.7f, -0.7f);
+        glVertex2f(0.7f, -0.7f);
         glEnd();
         
         // worldPointer.renderObjects();
     }
 
+    //let ImGui render to default buffer
+    unbindFrameBuffer();
     return colorTexture;
 }

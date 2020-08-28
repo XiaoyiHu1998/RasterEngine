@@ -27,7 +27,7 @@ int main(){
     //io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
     //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
-    // io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Viewports outside of main window
+    // io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;      // Enable Viewports outside of main window
     ImGui::StyleColorsDark();
 
     const char* glsl_version = "#version 130";
@@ -45,6 +45,8 @@ int main(){
         rasterEngine.drawSceneToTexture();
         
         //imgui systemInfo
+        glClearColor(0,0,0,0);
+        glClear(GL_COLOR_BUFFER_BIT);
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         rasterEngine.draw();
