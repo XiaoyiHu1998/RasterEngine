@@ -42,14 +42,20 @@ int main(){
     std::cout << glGetString(GL_VERSION) << std::endl;
     while(!glfwWindowShouldClose(window)){
 
-        rasterEngine.drawSceneToTexture();
         
         //imgui systemInfo
-        glClearColor(0,0,0,0);
-        glClear(GL_COLOR_BUFFER_BIT);
+        // glClearColor(0,0,0,0);
+        // glClear(GL_COLOR_BUFFER_BIT);
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
+        rasterEngine.drawSceneToTexture();
         rasterEngine.draw();
+
+        glBegin(GL_TRIANGLES);
+        glVertex2f(0.5f, 0.0f);
+        glVertex2f(0.0f, 0.05f);
+        glVertex2f(0.0f, -0.05f);
+        glEnd();
 
         //swap buffers
         glfwSwapBuffers(window);

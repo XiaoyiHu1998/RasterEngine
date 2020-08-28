@@ -60,18 +60,15 @@ unsigned int SceneRenderer::renderScene(){
         else{
             clear_color.y = 0.00f;
         }
+
         glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
-        // glClearColor(0,0,0,0);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        // glColor3f(1.0f, 1.0f, 1.0f);
         glBegin(GL_TRIANGLES);
-        glVertex2f(0.5f, 0.7f);
-        glVertex2f(-0.7f, -0.7f);
-        glVertex2f(0.7f, -0.7f);
+        glVertex2f(0.5f, 0.0f);
+        glVertex2f(0.0f, 0.05f);
+        glVertex2f(0.0f, -0.05f);
         glEnd();
-        
-        // worldPointer.renderObjects();
     }
 
     //let ImGui render to default buffer
