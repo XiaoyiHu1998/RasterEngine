@@ -11,7 +11,7 @@ private:
     bool sceneViewport;
     bool outliner;
     bool properties;
-    bool systemInfo;
+    bool performanceMetrics;
 
     std::shared_ptr<ImportManager> importManagerPointer;
     ImVec2 viewportSize;

@@ -6,7 +6,7 @@ UIRenderer::UIRenderer(GLFWwindow* window, std::shared_ptr<ImportManager> import
     sceneViewport{true},
     outliner{true},
     properties{true},
-    systemInfo{false},
+    performanceMetrics{true},
     importManagerPointer{importManagerPointer}
     {}
 
@@ -66,9 +66,11 @@ void UIRenderer::drawMainMenuBar(){
             }
             ImGui::EndMenu();
         }
-        if(ImGui::BeginMenu("System")){
-            if(ImGui::MenuItem("System Info")){
-                systemInfo = !systemInfo;
+        if(ImGui::BeginMenu("Options")){
+            if(sceneViewport){
+                if(ImGui::MenuItem("Perfomance Overlay")){
+                    performanceMetrics = !performanceMetrics;
+                }
             }
             ImGui::EndMenu();
         }
@@ -92,12 +94,6 @@ void UIRenderer::drawOpenWindows(unsigned int colorTexture){
         ImGui::Begin("Properties");
         ImGui::End();
     }
-    if(systemInfo){
-        ImGui::Begin("System");
-        ImGui::Text("%.1f FPS", ImGui::GetIO().Framerate);
-        ImGui::Text("%.3f ms", 1000.0f / ImGui::GetIO().Framerate);
-        ImGui::End();
-    }
 }
 
 void UIRenderer::draw3DViewport(unsigned int colorTexture){
@@ -105,11 +101,13 @@ void UIRenderer::draw3DViewport(unsigned int colorTexture){
         ImGui::BeginChild("FrameBuffer");
             viewportSize = ImGui::GetWindowSize();
             ImGui::Image((ImTextureID)colorTexture, viewportSize, ImVec2(0, 1), ImVec2(1, 0));
-            
-            ImGui::SetCursorPos(ImVec2(10, 5));
-            ImGui::Text("%.1f fps", ImGui::GetIO().Framerate);
-            ImGui::SetCursorPos(ImVec2(10, 15));
-            ImGui::Text("%.3f ms", 1000.0f / ImGui::GetIO().Framerate);
+
+            if(performanceMetrics){
+                ImGui::SetCursorPos(ImVec2(8, 5));
+                ImGui::Text("%.1f fps", ImGui::GetIO().Framerate);
+                ImGui::SetCursorPos(ImVec2(8, 15));
+                ImGui::Text("%.3f ms", 1000.0f / ImGui::GetIO().Framerate);
+            }
         ImGui::EndChild();
         
     ImGui::End();
