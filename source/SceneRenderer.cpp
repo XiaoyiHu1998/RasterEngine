@@ -52,7 +52,6 @@ void SceneRenderer::unbindFrameBuffer(){
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-
 unsigned int SceneRenderer::renderScene(){
     //render to right buffer
     bindFrameBuffer();
@@ -69,3 +68,9 @@ unsigned int SceneRenderer::renderScene(){
     unbindFrameBuffer();
     return colorTexture;
 }
+
+void SceneRenderer::setRenderResolution(ImVec2 viewportSize){
+    screenWidth = viewportSize.x;
+    screenHeight = viewportSize.y;
+}
+

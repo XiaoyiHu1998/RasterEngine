@@ -16,4 +16,5 @@ void RendererManager::renderScene(){
 void RendererManager::renderProgramWindow(){
     ui.drawUI(colorTexture);
     ui.drawToScreen();
+    scene.setRenderResolution(ui.getViewportSize());
 }

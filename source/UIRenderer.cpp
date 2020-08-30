@@ -12,7 +12,7 @@ UIRenderer::UIRenderer(GLFWwindow* window, std::shared_ptr<ImportManager> import
 
 void UIRenderer::drawUI(unsigned int colorTexture){
     ImGui::NewFrame();
-    
+
     static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
     static bool dockspaceOpen = true;
 
@@ -105,6 +105,8 @@ void UIRenderer::draw3DViewport(unsigned int colorTexture){
                 ImGui::Text("%.1f fps", ImGui::GetIO().Framerate);
                 ImGui::SetCursorPos(ImVec2(8, 15));
                 ImGui::Text("%.3f ms", 1000.0f / ImGui::GetIO().Framerate);
+                ImGui::SetCursorPos(ImVec2(8, 25));
+                ImGui::Text("%dx%d", (int)ImGui::GetWindowSize().x, (int)ImGui::GetWindowSize().y);
             }
         ImGui::EndChild();
         

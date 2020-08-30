@@ -20,6 +20,7 @@ private:
 public:
     SceneRenderer(std::shared_ptr<World> worldPointer);
     void createFrameBuffer();
+    void setRenderResolution(ImVec2 viewportSize);
     unsigned int renderScene();
 };
 
