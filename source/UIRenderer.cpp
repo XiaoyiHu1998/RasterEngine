@@ -12,7 +12,7 @@ UIRenderer::UIRenderer(GLFWwindow* window, std::shared_ptr<ImportManager> import
 
 void UIRenderer::drawUI(unsigned int colorTexture){
     ImGui::NewFrame();
-
+    
     static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
     static bool dockspaceOpen = true;
 
@@ -116,8 +116,8 @@ void UIRenderer::drawToScreen(){
     ImGui::Render();
     ImGui::UpdatePlatformWindows();
     int display_w, display_h;
-    glViewport(0, 0, display_w, display_h);
     glfwGetFramebufferSize(window, &display_w, &display_h);
+    glViewport(0, 0, display_w, display_h);
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
