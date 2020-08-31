@@ -57,7 +57,7 @@ unsigned int SceneRenderer::renderScene(){
     bindFrameBuffer();
 
     //rendering scene
-    // glColor3f(1,1,1);
+    glViewport(0, 0, screenWidth, screenHeight);
     glBegin(GL_TRIANGLES);
     glVertex2f(0.0f, 0.7f);
     glVertex2f(-0.5f, -0.5f);
