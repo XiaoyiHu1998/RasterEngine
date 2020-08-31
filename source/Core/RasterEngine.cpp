@@ -1,9 +1,9 @@
 #include "RasterEngine.hpp"
 
 RasterEngine::RasterEngine(GLFWwindow* window):
-    world{World()},
-    importManager{ImportManager(std::make_shared<World>(world))},
-    rendererManager{RendererManager(window, std::make_shared<World>(world), std::make_shared<ImportManager>(importManager))}
+    scene{Scene()},
+    importManager{ImportManager(std::make_shared<Scene>(scene))},
+    rendererManager{RendererManager(window, std::make_shared<Scene>(scene), std::make_shared<ImportManager>(importManager))}
     {
         rendererManager.init();
     }

@@ -2,13 +2,13 @@
 #define RASTER_ENGINE_HPP
 
 #include "masterInclude.hpp"
-#include "World.hpp"
+#include "Scene.hpp"
 #include "RendererManager.hpp"
 #include "ImportManager.hpp"
 
 class RasterEngine{
 private:
-    World world;
+    Scene scene;
     ImportManager importManager;
     RendererManager rendererManager;
     

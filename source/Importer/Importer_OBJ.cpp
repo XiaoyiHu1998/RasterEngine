@@ -1,7 +1,7 @@
 #include "Importer_OBJ.hpp"
 
-Importer_OBJ::Importer_OBJ(std::shared_ptr<World> worldPointer):
-    Importer{worldPointer}
+Importer_OBJ::Importer_OBJ(std::shared_ptr<Scene> scenePointer):
+    Importer{scenePointer}
     {}
 
 Mesh Importer_OBJ::import(const std::string& filepath) {

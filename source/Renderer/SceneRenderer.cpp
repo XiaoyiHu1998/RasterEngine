@@ -3,8 +3,8 @@
 #include "GLM\ext\matrix_clip_space.hpp"
 #include "GLM\gtc\type_ptr.hpp"
 
-SceneRenderer::SceneRenderer(std::shared_ptr<World> worldPointer):
-    worldPointer{worldPointer},
+SceneRenderer::SceneRenderer(std::shared_ptr<Scene> scenePointer):
+    scenePointer{scenePointer},
     screenWidth{640},
     screenHeight{480},
     clear_color{ImVec4(0.35f, 0.55f, 0.45f, 1.00f)}

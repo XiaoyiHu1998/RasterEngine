@@ -1,7 +1,7 @@
 #include "RendererManager.hpp"
 
-RendererManager::RendererManager(GLFWwindow* window, std::shared_ptr<World> worldPointer, std::shared_ptr<ImportManager> importManagerPointer):
-    scene{SceneRenderer(worldPointer)},
+RendererManager::RendererManager(GLFWwindow* window, std::shared_ptr<Scene> scenePointer, std::shared_ptr<ImportManager> importManagerPointer):
+    scene{SceneRenderer(scenePointer)},
     ui{UIRenderer(window, importManagerPointer)}
     {}
 

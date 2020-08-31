@@ -10,7 +10,7 @@ private:
     std::string materialName;
     void handleInputLine(const std::string& inputLine, std::vector<PreMesh>& preMeshes) override;
 public:
-    Importer_OBJ(std::shared_ptr<World> worldPointer);
+    Importer_OBJ(std::shared_ptr<Scene> scenePointer);
     Mesh import(const std::string& filepath) override;
 };
 

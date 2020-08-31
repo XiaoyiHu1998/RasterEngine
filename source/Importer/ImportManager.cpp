@@ -1,7 +1,7 @@
 #include "ImportManager.hpp"
 
-ImportManager::ImportManager(std::shared_ptr<World> worldPointer):
-    importer_obj{Importer_OBJ(worldPointer)}
+ImportManager::ImportManager(std::shared_ptr<Scene> scenePointer):
+    importer_obj{Importer_OBJ(scenePointer)}
     {}
 
 std::string ImportManager::getFilePath(){

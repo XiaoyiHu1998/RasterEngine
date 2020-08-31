@@ -2,18 +2,18 @@
 #define IMPORTER_HPP
 
 #include "masterInclude.hpp"
-#include "World.hpp"
+#include "Scene.hpp"
 #include "Mesh.hpp"
 
 class Importer{
 private:
-    std::shared_ptr<World>  worldPointer;
+    std::shared_ptr<Scene> scenePointer;
     
     virtual void handleInputLine(const std::string& inputLine, std::vector<PreMesh>& preMeshes) = 0;
     
 public:
-    Importer(std::shared_ptr<World> worldPointer){
-        worldPointer = worldPointer;
+    Importer(std::shared_ptr<Scene> scenePointer){
+        scenePointer = scenePointer;
     }
 
     virtual Mesh import(const std::string& filepath) = 0;

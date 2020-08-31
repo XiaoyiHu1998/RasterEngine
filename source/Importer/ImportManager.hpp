@@ -9,7 +9,7 @@ private:
 
     std::string getFilePath();
 public:
-    ImportManager(std::shared_ptr<World> worldPointer);
+    ImportManager(std::shared_ptr<Scene> scenePointer);
     void import();
 };
 

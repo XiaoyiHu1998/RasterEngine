@@ -1,14 +1,14 @@
-#ifndef WORLD_HPP
-#define WORLD_HPP
+#ifndef SCENE_HPP
+#define SCENE_HPP
 
 #include "masterInclude.hpp"
 #include "Mesh.hpp"
 
-class World{
+class Scene{
 private:
     std::vector<Mesh> meshVector;
 public:
-    World(){}
+    Scene(){}
 };
 
-#endif //WORLD_HPP
+#endif //SCENE_HPP
