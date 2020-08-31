@@ -1,4 +1,7 @@
 #include "SceneRenderer.hpp"
+#include "GLM\glm.hpp"
+#include "GLM\ext\matrix_clip_space.hpp"
+#include "GLM\gtc\type_ptr.hpp"
 
 SceneRenderer::SceneRenderer(std::shared_ptr<World> worldPointer):
     worldPointer{worldPointer},
@@ -58,6 +61,7 @@ unsigned int SceneRenderer::renderScene(){
 
     //rendering scene
     glViewport(0, 0, screenWidth, screenHeight);
+
     glBegin(GL_TRIANGLES);
     glVertex2f(0.0f, 0.7f);
     glVertex2f(-0.5f, -0.5f);
