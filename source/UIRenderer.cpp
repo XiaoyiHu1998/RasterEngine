@@ -7,6 +7,7 @@ UIRenderer::UIRenderer(GLFWwindow* window, std::shared_ptr<ImportManager> import
     outliner{true},
     properties{true},
     performanceMetrics{true},
+    demoWindow{false},
     importManagerPointer{importManagerPointer}
     {}
 
@@ -62,6 +63,9 @@ void UIRenderer::drawMainMenuBar(){
             if(ImGui::MenuItem("Properties")){
                 properties = !properties;
             }
+            if(ImGui::MenuItem("ImGui Demo")){
+                demoWindow = !demoWindow;
+            }
             ImGui::EndMenu();
         }
         if(ImGui::BeginMenu("Options")){
@@ -92,12 +96,15 @@ void UIRenderer::drawOpenWindows(unsigned int colorTexture){
         ImGui::Begin("Properties");
         ImGui::End();
     }
+    if(demoWindow){
+        ImGui::ShowDemoWindow(&demoWindow);
+    }
 }
 
 void UIRenderer::draw3DViewport(unsigned int colorTexture){
     ImGui::Begin("3D Viewport");
         ImGui::BeginChild("FrameBuffer");
-            viewportSize = ImGui::GetWindowSize();
+            viewportSize = ImVec2(ImGui::GetWindowContentRegionMax().x - ImGui::GetWindowContentRegionMin().x, ImGui::GetWindowContentRegionMax().y - ImGui::GetWindowContentRegionMin().y);
             ImGui::Image((ImTextureID)colorTexture, viewportSize, ImVec2(0, 1), ImVec2(1, 0));
 
             if(performanceMetrics){
@@ -106,7 +113,7 @@ void UIRenderer::draw3DViewport(unsigned int colorTexture){
                 ImGui::SetCursorPos(ImVec2(8, 15));
                 ImGui::Text("%.3f ms", 1000.0f / ImGui::GetIO().Framerate);
                 ImGui::SetCursorPos(ImVec2(8, 25));
-                ImGui::Text("%dx%d", (int)ImGui::GetWindowSize().x, (int)ImGui::GetWindowSize().y);
+                ImGui::Text("%dx%d", (int)(ImGui::GetWindowContentRegionMax().x - ImGui::GetWindowContentRegionMin().x), (int)(ImGui::GetWindowContentRegionMax().y - ImGui::GetWindowContentRegionMin().y));
             }
         ImGui::EndChild();
         
@@ -119,7 +126,7 @@ void UIRenderer::drawToScreen(){
     ImGui::UpdatePlatformWindows();
     int display_w, display_h;
     glfwGetFramebufferSize(window, &display_w, &display_h);
-    glViewport(0, 0, display_w, display_h);
+    glViewport(0, 0, display_w /2, display_h /2);
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 

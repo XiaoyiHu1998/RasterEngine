@@ -12,6 +12,7 @@ private:
     bool outliner;
     bool properties;
     bool performanceMetrics;
+    bool demoWindow;
 
     std::shared_ptr<ImportManager> importManagerPointer;
     ImVec2 viewportSize;
