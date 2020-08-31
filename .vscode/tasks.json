@@ -8,14 +8,14 @@
 			// "command": "C:\\MinGW\\bin\\g++.exe",  	//laptop
 			"args": [
 				"-g",
-				"${workspaceFolder}\\source\\main.cpp",
-				"${workspaceFolder}\\source\\RasterEngine.cpp",
-<<<<<<< HEAD
-=======
-				"${workspaceFolder}\\source\\ImportManager.cpp",
-				"${workspaceFolder}\\source\\Importer_OBJ.cpp",
-				"${workspaceFolder}\\source\\PreMesh.cpp",
->>>>>>> 68907d5815d8ed24b81d5f3bd3ae2b4617489c09
+				"${workspaceFolder}\\source\\Core\\main.cpp",
+				"${workspaceFolder}\\source\\Core\\RasterEngine.cpp",
+				"${workspaceFolder}\\source\\Renderer\\RendererManager.cpp",
+				"${workspaceFolder}\\source\\Renderer\\SceneRenderer.cpp",
+				"${workspaceFolder}\\source\\Renderer\\UIRenderer.cpp",
+				"${workspaceFolder}\\source\\Importer\\ImportManager.cpp",
+				"${workspaceFolder}\\source\\Importer\\Importer_OBJ.cpp",
+				"${workspaceFolder}\\source\\Meshes\\PreMesh.cpp",
 				"-o",
 				"${workspaceFolder}\\bin\\RasterEngine.exe",
 
@@ -30,6 +30,11 @@
 				/*Include Paths*/
 				"-I${workspaceFolder}\\dependencies",
 				"-I${workspaceFolder}\\dependencies\\IMGUI",
+				"-I${workspaceFolder}\\source\\Core",
+				"-I${workspaceFolder}\\source\\Importer",
+				"-I${workspaceFolder}\\source\\Renderer",
+				"-I${workspaceFolder}\\source\\Meshes",
+				"-I${workspaceFolder}\\source\\Scene",
 				
 				/*Library Paths*/
 				"-L${workspaceFolder}\\dependencies\\GL",
