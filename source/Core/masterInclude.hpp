@@ -9,7 +9,7 @@
 #include "GLFW/glfw3.h"
 #include "GLM/glm.hpp"
 
-#define NOMINMAX
+// #define NOMINMAX
 #include <windows.h>
 #undef NOMINMAX
 
