@@ -1,7 +1,4 @@
 #include "SceneRenderer.hpp"
-#include "GLM\glm.hpp"
-#include "GLM\ext\matrix_clip_space.hpp"
-#include "GLM\gtc\type_ptr.hpp"
 
 SceneRenderer::SceneRenderer(std::shared_ptr<Scene> scenePointer):
     scenePointer{scenePointer},
