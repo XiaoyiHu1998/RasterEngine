@@ -15,6 +15,7 @@ private:
     ImVec4 clear_color;
     float colorDelta;
     
+    void deleteFrameBuffer();
     void bindFrameBuffer();
     void unbindFrameBuffer();
 public:

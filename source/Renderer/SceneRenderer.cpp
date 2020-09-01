@@ -5,8 +5,8 @@
 
 SceneRenderer::SceneRenderer(std::shared_ptr<Scene> scenePointer):
     scenePointer{scenePointer},
-    screenWidth{640},
-    screenHeight{480},
+    screenWidth{1920},
+    screenHeight{1080},
     clear_color{ImVec4(0.35f, 0.55f, 0.45f, 1.00f)}
     {}
 
@@ -39,6 +39,7 @@ void SceneRenderer::createFrameBuffer(){
 
 void SceneRenderer::bindFrameBuffer(){
     glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
+    glViewport(0, 0, screenWidth, screenHeight);
     if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE){
         std::cout << "framebuffer status: " << glCheckFramebufferStatus(GL_FRAMEBUFFER) << std::endl;
     }
@@ -51,16 +52,28 @@ void SceneRenderer::bindFrameBuffer(){
     glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
     glClear(GL_COLOR_BUFFER_BIT);
 }
+
 void SceneRenderer::unbindFrameBuffer(){
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
+void SceneRenderer::deleteFrameBuffer(){
+    glBindTexture(GL_TEXTURE_2D, 0);
+    glBindRenderbuffer(GL_RENDERBUFFER, 0);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+    glDeleteTextures(1, &colorTexture);
+    glDeleteRenderbuffers(1, &renderBuffer);
+    glDeleteFramebuffers(1, &frameBuffer);
+}
+
 unsigned int SceneRenderer::renderScene(){
     //render to right buffer
+    deleteFrameBuffer();
+    createFrameBuffer();
     bindFrameBuffer();
 
     //rendering scene
-    glViewport(0, 0, screenWidth, screenHeight);
 
     glBegin(GL_TRIANGLES);
     glVertex2f(0.0f, 0.7f);
@@ -68,7 +81,7 @@ unsigned int SceneRenderer::renderScene(){
     glVertex2f(0.5f, -0.5f);
     glEnd();
 
-    //let ImGui render to default buffer
+    //return colorTexture
     unbindFrameBuffer();
     return colorTexture;
 }

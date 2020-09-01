@@ -102,6 +102,7 @@ void UIRenderer::drawOpenWindows(unsigned int colorTexture){
 }
 
 void UIRenderer::draw3DViewport(unsigned int colorTexture){
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
     ImGui::Begin("3D Viewport");
         ImGui::BeginChild("FrameBuffer");
             viewportSize = ImVec2(ImGui::GetWindowContentRegionMax().x - ImGui::GetWindowContentRegionMin().x, ImGui::GetWindowContentRegionMax().y - ImGui::GetWindowContentRegionMin().y);
@@ -116,8 +117,8 @@ void UIRenderer::draw3DViewport(unsigned int colorTexture){
                 ImGui::Text("%dx%d", (int)(ImGui::GetWindowContentRegionMax().x - ImGui::GetWindowContentRegionMin().x), (int)(ImGui::GetWindowContentRegionMax().y - ImGui::GetWindowContentRegionMin().y));
             }
         ImGui::EndChild();
-        
     ImGui::End();
+    ImGui::PopStyleVar();
 }
 
 void UIRenderer::drawToScreen(){
@@ -126,7 +127,7 @@ void UIRenderer::drawToScreen(){
     ImGui::UpdatePlatformWindows();
     int display_w, display_h;
     glfwGetFramebufferSize(window, &display_w, &display_h);
-    glViewport(0, 0, display_w /2, display_h /2);
+    glViewport(0, 0, display_w, display_h);
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
