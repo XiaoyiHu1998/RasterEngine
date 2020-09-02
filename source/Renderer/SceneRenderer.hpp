@@ -10,8 +10,9 @@ private:
     unsigned int colorTexture;
     unsigned int renderBuffer;
     
-    int screenWidth;
-    int screenHeight;
+    int viewportWidth;
+    int viewportHeight;
+    bool viewportSizeChanged;
     ImVec4 clear_color;
     float colorDelta;
     
