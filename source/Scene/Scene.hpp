@@ -8,7 +8,8 @@ class Scene{
 private:
     std::vector<Mesh> meshVector;
 public:
-    Scene(){}
+    Scene();
+    void render();
 };
 
 #endif //SCENE_HPP

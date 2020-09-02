@@ -42,7 +42,7 @@ void SceneRenderer::bindFrameBuffer(){
         std::cout << "framebuffer status: " << glCheckFramebufferStatus(GL_FRAMEBUFFER) << std::endl;
     }
     if(clear_color.y < 0.80f){
-        clear_color.y += 0.003f;
+        clear_color.y += 0.001f;
     }
     else{
         clear_color.y = 0.20f;

@@ -3,6 +3,7 @@
 
 #include "masterInclude.hpp"
 #include "Scene.hpp"
+#include "PreMesh.hpp"
 #include "Mesh.hpp"
 
 class Importer{
