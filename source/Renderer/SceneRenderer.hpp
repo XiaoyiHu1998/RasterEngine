@@ -2,6 +2,7 @@
 #define SCENE_RENDERER_HPP
 
 #include "Scene.hpp"
+#include "Camera.hpp"
 
 class SceneRenderer{
 private:
@@ -23,7 +24,7 @@ public:
     SceneRenderer(std::shared_ptr<Scene> scenePointer);
     void createFrameBuffer();
     void setRenderResolution(ImVec2 viewportSize);
-    unsigned int renderScene();
+    unsigned int renderScene(const Camera& camera);
 };
 
 #endif //SCENE_RENDERER_HPP

@@ -48,7 +48,6 @@ int main(){
         //imgui
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
-        rasterEngine.drawSceneToTexture();
         rasterEngine.draw();
 
         //swap buffers

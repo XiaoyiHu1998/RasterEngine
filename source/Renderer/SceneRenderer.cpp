@@ -65,7 +65,7 @@ void SceneRenderer::deleteFrameBuffer(){
     glDeleteFramebuffers(1, &frameBuffer);
 }
 
-unsigned int SceneRenderer::renderScene(){
+unsigned int SceneRenderer::renderScene(const Camera& camera){
     //render to right buffer
     if(viewportSizeChanged){
         deleteFrameBuffer();
@@ -75,11 +75,13 @@ unsigned int SceneRenderer::renderScene(){
     bindFrameBuffer();
 
     //rendering scene
-    glBegin(GL_TRIANGLES);
-    glVertex2f(0.0f, 0.7f);
-    glVertex2f(-0.5f, -0.5f);
-    glVertex2f(0.5f, -0.5f);
-    glEnd();
+    // glBegin(GL_TRIANGLES);
+    // glVertex2f(0.0f, 0.7f);
+    // glVertex2f(-0.5f, -0.5f);
+    // glVertex2f(0.5f, -0.5f);
+    // glEnd();
+
+    scenePointer->render();
 
     //return colorTexture
     unbindFrameBuffer();
