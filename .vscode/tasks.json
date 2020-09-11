@@ -10,12 +10,20 @@
 				"-g",
 				"${workspaceFolder}\\source\\Core\\main.cpp",
 				"${workspaceFolder}\\source\\Core\\RasterEngine.cpp",
+
 				"${workspaceFolder}\\source\\Renderer\\RendererManager.cpp",
 				"${workspaceFolder}\\source\\Renderer\\SceneRenderer.cpp",
 				"${workspaceFolder}\\source\\Renderer\\UIRenderer.cpp",
+				"${workspaceFolder}\\source\\Renderer\\Camera.cpp",
+
 				"${workspaceFolder}\\source\\Importer\\ImportManager.cpp",
 				"${workspaceFolder}\\source\\Importer\\Importer_OBJ.cpp",
+
 				"${workspaceFolder}\\source\\Meshes\\PreMesh.cpp",
+				"${workspaceFolder}\\source\\Meshes\\Mesh.cpp",
+
+				"${workspaceFolder}\\source\\Scene\\Scene.cpp",
+
 				"-o",
 				"${workspaceFolder}\\bin\\RasterEngine.exe",
 
