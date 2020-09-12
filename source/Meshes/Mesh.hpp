@@ -8,8 +8,6 @@ private:
     int vertexPositionDimensions;
     int vertexTextureCoordinateCount;
     int vertexNormalComponentCount;
-
-    std::vector<float> vertexBuffer;
 public:
     Mesh();
     void render();
