@@ -28,4 +28,28 @@
 
 #define THREAD_COUNT std::thread::hardware_concurrency();
 
+static void GLClearError(){
+    while(glGetError() != GL_NO_ERROR);     //same as having {} as loop body
+}
+
+static bool GLLogCall(const char* function, const char* file, int line){
+    while(GLenum glError = glGetError()){     //assigns the errorcode to error and uses it to evaluate loop condition
+        std::cout << "[OpenGL Error]" << "(0x" << std::hex << glError << ") in " << function << " in file " << file << " on line " << line << std::endl;
+        return false;
+    }
+    return true;
+}
+
+namespace RE{
+    #define ASSERT(x) if(!(x)) __builtin_trap();
+    
+    #ifdef DEBUG
+        #define GLCall(X) GLClearError();\ 
+                            x;\ 
+                            ASSERT(GLLogCall(#x, __FILE__, __LINE__)) 
+    #else
+        #define GLCall(x) x
+    #endif // DEBUG
+}
+
 #endif //MASTERINCLUDE_HPP
