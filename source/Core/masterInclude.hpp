@@ -33,23 +33,19 @@ static void GLClearError(){
 }
 
 static bool GLLogCall(const char* function, const char* file, int line){
-    while(GLenum glError = glGetError()){     //assigns the errorcode to error and uses it to evaluate loop condition
-        std::cout << "[OpenGL Error]" << "(0x" << std::hex << glError << ") in " << function << " in file " << file << " on line " << line << std::endl;
+    if(GLenum glError = glGetError()){     //assigns the errorcode to error and uses it to evaluate loop condition
+        std::cout << "[OpenGL Error]" << "(0x" << std::hex << glError << std::dec << ") in " << function << " in file " << file << " on line " << line << std::endl;
         return false;
     }
     return true;
 }
 
-namespace RE{
-    #define ASSERT(x) if(!(x)) __builtin_trap();
-    
-    #ifdef DEBUG
-        #define GLCall(X) GLClearError();\ 
-                            x;\ 
-                            ASSERT(GLLogCall(#x, __FILE__, __LINE__)) 
-    #else
-        #define GLCall(x) x
-    #endif // DEBUG
-}
+#define RE_ASSERT(x) if(!(x)) __builtin_trap(); //only compatible with gcc at the moment
+
+#ifdef DEBUG //GLCall
+    #define GLCall(X) GLClearError(); x; RE_ASSERT(GLLogCall(#x, __FILE__, __LINE__)) 
+#else
+    #define GLCall(x) x
+#endif // DEBUG
 
 #endif //MASTERINCLUDE_HPP
