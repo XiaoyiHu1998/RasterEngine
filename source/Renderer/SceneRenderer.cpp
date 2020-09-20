@@ -14,7 +14,7 @@ void SceneRenderer::createFrameBuffer(){
     GLCall(glGenFramebuffers(1, &frameBuffer));
     GLCall(glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer));
 
-    GLCall(//create and bind colorTexture
+    //create and bind colorTexture
     GLCall(glGenTextures(1, &colorTexture));
     GLCall(glBindTexture(GL_TEXTURE_2D, colorTexture));
     GLCall(glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, viewportHeight, viewportHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL));
@@ -22,7 +22,7 @@ void SceneRenderer::createFrameBuffer(){
     GLCall(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
     GLCall(glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorTexture, 0));
 
-    GLCall(//create and bind renderBuffer object
+    //create and bind renderBuffer object
     GLCall(glGenRenderbuffers(1, &renderBuffer));
     GLCall(glBindRenderbuffer(GL_RENDERBUFFER, renderBuffer));
     GLCall(glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, viewportHeight, viewportHeight));
@@ -95,4 +95,3 @@ void SceneRenderer::setRenderResolution(ImVec2 viewportSize){
         viewportHeight = viewportSize.y;
     }
 }
-

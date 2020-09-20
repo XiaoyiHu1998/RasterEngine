@@ -8,10 +8,11 @@ private:
     uint32_t bufferID;
     uint32_t bufferSize;
 public:
-    IndexBuffer(float (&data)[], int dataArrayCount);
+    IndexBuffer(){}
+    IndexBuffer(float* bufferData, int dataArrayCount);
     ~IndexBuffer();
     uint32_t getBufferID();
-    void setBufferData(float (&data)[], int dataArrayCount);
+    void setBufferData(float* bufferData, int dataArrayCount);
     void bind();
     void unbind();
 };
