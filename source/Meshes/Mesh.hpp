@@ -16,6 +16,7 @@ private:
     int vertexTextureCoordinateCount;
     int vertexNormalComponentCount;
 public:
+    Mesh(){}
     Mesh(VertexBuffer vertexBuffer, IndexBuffer indexBuffer, Shader shader);
     void render();
 };
