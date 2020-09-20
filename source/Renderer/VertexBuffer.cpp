@@ -21,6 +21,10 @@ uint32_t VertexBuffer::getBufferID(){
     return bufferID;
 }
 
+uint32_t VertexBuffer::getSize(){
+    return bufferSize;
+}
+
 void VertexBuffer::bind(){
     GLCall(glBindBuffer(GL_ARRAY_BUFFER, bufferID));
 }
