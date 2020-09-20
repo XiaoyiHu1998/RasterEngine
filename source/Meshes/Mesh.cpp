@@ -1,12 +1,16 @@
 #include "Mesh.hpp"
 
-Mesh::Mesh(){
+Mesh::Mesh(VertexBuffer vertexBuffer, IndexBuffer indexBuffer, Shader shader){
     vertexPositionDimensions = 3;
     vertexNormalComponentCount = 3;
     vertexTextureCoordinateCount = 2;
 }
 
 void Mesh::render(){
+    // glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+    // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IndexBuffer);
+    // glDrawArrays(GL_TRIANGLES, 0, vertexBuffer.getSize());
+
     float vertices[] = {
          0.0f,   0.7f,  0.0f,
         -0.5f,  -0.5f,  0.0f,
