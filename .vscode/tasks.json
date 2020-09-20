@@ -15,6 +15,8 @@
 				"${workspaceFolder}\\source\\Renderer\\SceneRenderer.cpp",
 				"${workspaceFolder}\\source\\Renderer\\UIRenderer.cpp",
 				"${workspaceFolder}\\source\\Renderer\\Camera.cpp",
+				"${workspaceFolder}\\source\\Renderer\\VertexBuffer.cpp",
+				"${workspaceFolder}\\source\\Renderer\\IndexBuffer.cpp",
 
 				"${workspaceFolder}\\source\\Importer\\ImportManager.cpp",
 				"${workspaceFolder}\\source\\Importer\\Importer_OBJ.cpp",
