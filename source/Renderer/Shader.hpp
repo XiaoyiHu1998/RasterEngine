@@ -15,9 +15,10 @@ private:
     RE::ShaderType shaderType;
     uint32_t shaderID;
 public:
-    Shader();
-    ~Shader();
-    void bindshader();
+    Shader(){}
+    ~Shader(){}
+    void bindshader(){}
+    void bindUniforms(){}
 };
 
 #endif //SHADER_HPP
