@@ -9,10 +9,10 @@ private:
     uint32_t bufferSize;
 public:
     IndexBuffer(){}
-    IndexBuffer(float* bufferData, int dataArrayCount);
+    IndexBuffer(uint32_t* bufferData, int dataArrayCount);
     ~IndexBuffer();
     uint32_t getBufferID();
-    void setBufferData(float* bufferData, int dataArrayCount);
+    void setBufferData(uint32_t* bufferData, int dataArrayCount);
     void bind();
     void unbind();
 };

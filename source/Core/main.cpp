@@ -42,8 +42,8 @@ int main(){
     std::cout << glGetString(GL_VERSION) << std::endl;
     while(!glfwWindowShouldClose(window)){
 
-        glClearColor(0.1,0.5,0.7,1.0);
-        glClear(GL_COLOR_BUFFER_BIT);
+        GLCall(glClearColor(0.1,0.5,0.7,1.0));
+        GLCall(glClear(GL_COLOR_BUFFER_BIT));
 
         //imgui
         ImGui_ImplOpenGL3_NewFrame();

@@ -9,7 +9,7 @@
 class Mesh{
 private:
     VertexBuffer vertexBuffer;
-    IndexBuffer indexbuffer;
+    IndexBuffer indexBuffer;
     Shader shader;
     
     int vertexPositionDimensions;

@@ -1,6 +1,6 @@
 #include "indexBuffer.hpp"
 
-IndexBuffer::IndexBuffer(float* bufferData, int dataArrayCount){
+IndexBuffer::IndexBuffer(uint32_t* bufferData, int dataArrayCount){
     bufferSize = static_cast<uint32_t>(dataArrayCount) * sizeof(uint32_t);
     GLCall(glGenBuffers(1, &bufferID));
     GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bufferID));
@@ -11,7 +11,7 @@ IndexBuffer::~IndexBuffer(){
     GLCall(glDeleteBuffers(1, &bufferID));
 }
 
-void IndexBuffer::setBufferData(float* bufferData, int dataArrayCount){
+void IndexBuffer::setBufferData(uint32_t* bufferData, int dataArrayCount){
     bufferSize = static_cast<uint32_t>(dataArrayCount) * sizeof(uint32_t);
     GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bufferID));
     GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, bufferSize, bufferData, GL_STATIC_DRAW));
