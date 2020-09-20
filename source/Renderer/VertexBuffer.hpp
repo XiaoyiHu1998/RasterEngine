@@ -10,8 +10,9 @@ private:
 public:
     VertexBuffer(float (&data)[], int dataArrayCount);
     ~VertexBuffer();
-    void setBufferData(float (&data)[], int dataArrayCount);
     uint32_t getBufferID();
-};
+    void setBufferData(float (&data)[], int dataArrayCount);
+    void bind();
+    void unbind();
 
 #endif //VERTEX_BUFFER_HPP

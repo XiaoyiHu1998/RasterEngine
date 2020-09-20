@@ -10,8 +10,10 @@ private:
 public:
     IndexBuffer(float (&data)[], int dataArrayCount);
     ~IndexBuffer();
-    void setBufferData(float (&data)[], int dataArrayCount);
     uint32_t getBufferID();
+    void setBufferData(float (&data)[], int dataArrayCount);
+    void bind();
+    void unbind();
 };
 
 #endif //INDEX_BUFFER_HPP
