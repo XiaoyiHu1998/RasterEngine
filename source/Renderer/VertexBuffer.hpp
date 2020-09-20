@@ -11,6 +11,7 @@ public:
     VertexBuffer(float (&data)[], int dataArrayCount);
     ~VertexBuffer();
     uint32_t getBufferID();
+    uint32_t getSize();
     void setBufferData(float (&data)[], int dataArrayCount);
     void bind();
     void unbind();
