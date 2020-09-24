@@ -12,12 +12,12 @@ private:
     IndexBuffer indexBuffer;
     Shader shader;
     
-    int vertexPositionDimensions;
-    int vertexTextureCoordinateCount;
-    int vertexNormalComponentCount;
+    uint32_t vPosDimensions;
+    uint32_t vNormalDimensions;
+    uint32_t vTexDimensions;
 public:
     Mesh(){}
-    Mesh(VertexBuffer vertexBuffer, IndexBuffer indexBuffer, Shader shader);
+    Mesh(const VertexBuffer vertexBuffer, const IndexBuffer indexBuffer, const Shader shader);
     void render();
 };
 
