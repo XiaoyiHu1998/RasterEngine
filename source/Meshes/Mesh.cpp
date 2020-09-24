@@ -13,7 +13,7 @@ Mesh::Mesh(const VertexBuffer vertexBuffer, const IndexBuffer indexBuffer, const
 void Mesh::render(){
     std::cout << "binding buffers" << std::endl;
     vertexBuffer.bind();
-    vertexBuffer.bind();
+    indexBuffer.bind();
 
     std::cout << "setting clientstate" << std::endl;
     GLCall(glEnableClientState(GL_VERTEX_ARRAY));
