@@ -22,9 +22,9 @@ uint32_t IndexBuffer::getBufferID(){
 }
 
 void IndexBuffer::bind(){
-    GLCall(glBindBuffer(GL_ELEM_ARRAY_BUFFER, bufferID));
+    GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bufferID));
 }
 
 void IndexBuffer::unbind(){
-    GLCall(glBindBuffer(GL_ELEM_ARRAY_BUFFER, 0));
+    GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
 }
