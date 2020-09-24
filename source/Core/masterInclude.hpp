@@ -18,7 +18,6 @@
 
 #include "Primitives.hpp"
 
-#define DEBUG
 #define WINDOW_RES_X 1366
 #define WINDOW_RES_Y 768
 #define WINDOW_PIXEL_COUNT WINDOW_RES_X * WINDOW_RES_Y
@@ -57,10 +56,10 @@ static bool GLLogCall(const char* function, const char* path, int line){
 
 #define RE_ASSERT(x) if(!(x)); //exit(-1) should be replaced with a breakstatement
 
-#ifdef DEBUG //GLCall
+#ifdef RE_DEBUG //GLCall
     #define GLCall(x) GLClearError(); x; RE_ASSERT(GLLogCall(#x, __FILE__, __LINE__)) 
 #else
     #define GLCall(x) x
-#endif // DEBUG
+#endif // RE_DEBUG
 
 #endif //MASTERINCLUDE_HPP
