@@ -29,9 +29,27 @@ static void GLClearError(){
     while(glGetError() != GL_NO_ERROR);     //same as having {} as loop body
 }
 
-static bool GLLogCall(const char* function, const char* file, int line){
+static std::string glErrorString(GLenum error){
+    switch(error){
+        case GL_NO_ERROR:           return "GL_NO_ERROR";
+        case GL_INVALID_ENUM:       return "GL_INVALID_ENUM";
+        case GL_INVALID_VALUE:      return "GL_INVALID_VALUE";
+        case GL_INVALID_OPERATION:  return "GL_INVALID_OPERATION";
+        case GL_STACK_OVERFLOW:     return "GL_STACK_OVERFLOW";
+        case GL_STACK_UNDERFLOW:    return "GL_STACK_UNDERFLOW";
+        case GL_OUT_OF_MEMORY:      return "GL_OUT_OF_MEMORY";
+        default:                    return "GL_UNKOWN_ERROR";
+    }
+}
+
+static std::string getFileName(const char* file){
+    std::string path = file;
+    return path.substr(path.find_last_of('\\') + 1);
+}
+
+static bool GLLogCall(const char* function, const char* path, int line){
     if(GLenum glError = glGetError()){     //assigns the errorcode to error and uses it to evaluate loop condition
-        std::cout << "[OpenGL Error]" << "(0x0" << std::hex << glError << std::dec << ") on function " << function << " in file " << file << " on line " << line << std::endl;
+        std::cout << "[OpenGL Error] (0x0" << std::hex << glError << std::dec << ": " << glErrorString(glError) << ") -> " << function << ", " << path << ":" << line <<std::endl;
         return false;
     }
     return true;
