@@ -31,7 +31,7 @@ static void GLClearError(){
 
 static bool GLLogCall(const char* function, const char* file, int line){
     if(GLenum glError = glGetError()){     //assigns the errorcode to error and uses it to evaluate loop condition
-        std::cout << "[OpenGL Error]" << "(0x" << std::hex << glError << std::dec << ") in " << function << " in file " << file << " on line " << line << std::endl;
+        std::cout << "[OpenGL Error]" << "(0x0" << std::hex << glError << std::dec << ") on function " << function << " in file " << file << " on line " << line << std::endl;
         return false;
     }
     return true;
