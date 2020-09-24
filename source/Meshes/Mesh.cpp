@@ -11,18 +11,13 @@ Mesh::Mesh(const VertexBuffer vertexBuffer, const IndexBuffer indexBuffer, const
     }
 
 void Mesh::render(){
-    std::cout << "binding buffers" << std::endl;
     vertexBuffer.bind();
     indexBuffer.bind();
 
-    std::cout << "setting clientstate" << std::endl;
     GLCall(glEnableClientState(GL_VERTEX_ARRAY));
-    std::cout << "setting vertexPointer" << std::endl;
     GLCall(glVertexPointer(3, GL_FLOAT, 0, 0));
 
-    std::cout << "drawing buffers, " << "indexBufferCount: " << indexBuffer.getCount() << std::endl;
     GLCall(glDrawElements(GL_TRIANGLES, indexBuffer.getCount(), GL_UNSIGNED_INT, 0));
-    std::cout << "disabling client state" << std::endl;
     GLCall(glDisableClientState(GL_VERTEX_ARRAY));
 
     // float vertices[] = {
