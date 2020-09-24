@@ -1,10 +1,6 @@
 #ifndef MASTERINCLUDE_HPP
 #define MASTERINCLUDE_HPP
 
-#define NOMINMAX
-#include <windows.h>
-#undef NOMINMAX
-
 #include "IMGUI/imgui.h"
 #include "IMGUI/imgui_impl_glfw.h"
 #include "IMGUI/imgui_impl_opengl3.h"
@@ -18,7 +14,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
-#include <functional>
+// #include <functional>
 
 #include "Primitives.hpp"
 
@@ -41,7 +37,7 @@ static bool GLLogCall(const char* function, const char* file, int line){
     return true;
 }
 
-#define RE_ASSERT(x) if(!(x)) exit(-1); //only compatible with gcc at the moment
+#define RE_ASSERT(x) if(!(x)); //exit(-1) should be replaced with a breakstatement
 
 #ifdef DEBUG //GLCall
     #define GLCall(x) GLClearError(); x; RE_ASSERT(GLLogCall(#x, __FILE__, __LINE__)) 
