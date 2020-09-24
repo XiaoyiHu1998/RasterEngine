@@ -1,6 +1,8 @@
 #ifndef IMPORT_MANAGER_HPP
 #define IMPORT_MANAGER_HPP
 
+#include <windows.h>
+
 #include "Importer_OBJ.hpp"
 
 class ImportManager{
