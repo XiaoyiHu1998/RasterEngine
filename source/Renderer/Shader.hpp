@@ -13,12 +13,13 @@ namespace RE{
 class Shader{
 private:
     RE::ShaderType shaderType;
-    uint32_t shaderID;
+    uint32_t programID;
 public:
     Shader(){}
-    ~Shader(){}
-    void bindshader(){}
-    void bindUniforms(){}
+    Shader(const char* fragmentShader, const char* vertexShader = "Shaders/defaultVertexShader.txt");
+    ~Shader();
+    void useProgram();
+    void bindUniforms();
 };
 
 #endif //SHADER_HPP

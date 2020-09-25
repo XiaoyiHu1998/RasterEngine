@@ -1,8 +1,8 @@
 #include "Mesh.hpp"
 
-Mesh::Mesh(const VertexBuffer vertexBuffer, const IndexBuffer indexBuffer, const Shader shader):
-    vertexBuffer{vertexBuffer},
-    indexBuffer{indexBuffer},
+Mesh::Mesh(std::shared_ptr<VertexBuffer> vbo, std::shared_ptr<IndexBuffer> ibo, std::shared_ptr<Shader> shader):
+    vertexBuffer{vbo},
+    indexBuffer{ibo},
     shader{shader}
     {
         vPosDimensions = 3;
@@ -11,32 +11,14 @@ Mesh::Mesh(const VertexBuffer vertexBuffer, const IndexBuffer indexBuffer, const
     }
 
 void Mesh::render(){
-    vertexBuffer.bind();
-    indexBuffer.bind();
-
+    vertexBuffer->bind();
+    indexBuffer->bind();
+    
     GLCall(glEnableClientState(GL_VERTEX_ARRAY));
-    GLCall(glVertexPointer(3, GL_FLOAT, 0, 0));
+    GLCall(glVertexPointer(vPosDimensions, GL_FLOAT, 0, 0));
 
-    GLCall(glDrawElements(GL_TRIANGLES, indexBuffer.getCount(), GL_UNSIGNED_INT, 0));
+    shader->useProgram();
+
+    GLCall(glDrawElements(GL_TRIANGLES, indexBuffer->getCount(), GL_UNSIGNED_INT, 0));
     GLCall(glDisableClientState(GL_VERTEX_ARRAY));
-
-    // float vertices[] = {
-    //      0.0f,   0.7f,  0.0f,
-    //     -0.5f,  -0.5f,  0.0f,
-    //      0.5f,  -0.5f,  0.0f
-    // };
-
-    // unsigned int vertexBuffer;
-    // glCreateBuffers(1, &vertexBuffer);
-    // glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-    // glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-    // glEnableVertexAttribArray(0);
-
-    // GLCall(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0));
-
-    // glDrawArrays(GL_TRIANGLES, 0, sizeof(vertices) / sizeof(float));
-
-    // glDeleteBuffers(1, &vertexBuffer);
-    // glDisableVertexAttribArray(0);
 }

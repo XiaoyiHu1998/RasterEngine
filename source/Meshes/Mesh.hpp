@@ -8,16 +8,16 @@
 
 class Mesh{
 private:
-    VertexBuffer vertexBuffer;
-    IndexBuffer indexBuffer;
-    Shader shader;
+    std::shared_ptr<VertexBuffer> vertexBuffer;
+    std::shared_ptr<IndexBuffer> indexBuffer;
+    std::shared_ptr<Shader> shader;
     
     uint32_t vPosDimensions;
     uint32_t vNormalDimensions;
     uint32_t vTexDimensions;
 public:
     Mesh(){}
-    Mesh(const VertexBuffer vertexBuffer, const IndexBuffer indexBuffer, const Shader shader);
+    Mesh(std::shared_ptr<VertexBuffer> vbo, std::shared_ptr<IndexBuffer> ibo, std::shared_ptr<Shader> shader);
     void render();
 };
 
