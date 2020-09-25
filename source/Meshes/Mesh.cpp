@@ -1,8 +1,8 @@
 #include "Mesh.hpp"
 
-Mesh::Mesh(const VertexBuffer vertexBuffer, const IndexBuffer indexBuffer, const Shader shader):
-    vertexBuffer{vertexBuffer},
-    indexBuffer{indexBuffer},
+Mesh::Mesh(std::shared_ptr<VertexBuffer> vbo, std::shared_ptr<IndexBuffer> ibo, std::shared_ptr<Shader> shader):
+    vertexBuffer{vbo},
+    indexBuffer{ibo},
     shader{shader}
     {
         vPosDimensions = 3;
@@ -11,13 +11,28 @@ Mesh::Mesh(const VertexBuffer vertexBuffer, const IndexBuffer indexBuffer, const
     }
 
 void Mesh::render(){
-    vertexBuffer.bind();
-    indexBuffer.bind();
-
+    vertexBuffer->bind();
     GLCall(glEnableClientState(GL_VERTEX_ARRAY));
     GLCall(glVertexPointer(3, GL_FLOAT, 0, 0));
 
-    GLCall(glDrawElements(GL_TRIANGLES, indexBuffer.getCount(), GL_UNSIGNED_INT, 0));
+    // std::vector<GLenum> bufferValues = {GL_BUFFER_ACCESS, GL_BUFFER_MAPPED, GL_BUFFER_SIZE, GL_BUFFER_USAGE};
+    // int bufferValue = 0;
+    // std::cout << "vertexBuffer:" << std::endl;
+    // for(GLenum value : bufferValues){
+    //     glGetBufferParameteriv(GL_ARRAY_BUFFER, value, &bufferValue);
+    //     switch(value){
+    //         case GL_BUFFER_ACCESS:  std::cout << "bufferAccess == GL_READ_WRITE: "  << (bufferValue == GL_READ_WRITE)    << std::endl;     break;
+    //         case GL_BUFFER_MAPPED:  std::cout << "bufferMapped == GL_FALSE: "       << (bufferValue == GL_FALSE)         << std::endl;     break;
+    //         case GL_BUFFER_SIZE:    std::cout << "bufferSize: "                     << bufferValue                       << std::endl;     break;
+    //         case GL_BUFFER_USAGE:   std::cout << "bufferUseage == GL_STATIC_DRAW: " << (bufferValue == GL_STATIC_DRAW)   << std::endl;     break;
+    //         default:                break;
+    //     }
+    // }
+
+    indexBuffer->bind();
+
+
+    GLCall(glDrawElements(GL_TRIANGLES, indexBuffer->getCount(), GL_UNSIGNED_INT, 0));
     GLCall(glDisableClientState(GL_VERTEX_ARRAY));
 
     // float vertices[] = {

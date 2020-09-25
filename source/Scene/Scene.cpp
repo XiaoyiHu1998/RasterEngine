@@ -12,9 +12,9 @@ Scene::Scene(){
         1, 2, 3
     };
 
-    VertexBuffer vbo(vertices, sizeof(vertices)/sizeof(float));
-    IndexBuffer ibo(indices, sizeof(indices)/sizeof(uint32_t));
-    Shader shader;
+    std::shared_ptr<VertexBuffer> vbo(new VertexBuffer(vertices, sizeof(vertices) / sizeof(float)));
+    std::shared_ptr<IndexBuffer> ibo(new IndexBuffer(indices, sizeof(vertices) / sizeof(float)));
+    std::shared_ptr<Shader> shader(new Shader());
     meshVector.push_back(Mesh(vbo, ibo, shader));
 }
 
