@@ -41,19 +41,20 @@ static bool GLLogCall(const char* function, const char* path, int line){
 
 
 static void outputBufferState(){
+    std::cout << "vertexBuffer:\n";
     std::vector<GLenum> bufferValues = {GL_BUFFER_ACCESS, GL_BUFFER_MAPPED, GL_BUFFER_SIZE, GL_BUFFER_USAGE};
     int bufferValue = 0;
-    std::cout << "vertexBuffer:" << std::endl;
     for(GLenum value : bufferValues){
         GLCall(glGetBufferParameteriv(GL_ARRAY_BUFFER, value, &bufferValue));
         switch(value){
-            case GL_BUFFER_ACCESS:  std::cout << "bufferAccess == GL_READ_WRITE: "  << (bufferValue == GL_READ_WRITE)    << std::endl;     break;
-            case GL_BUFFER_MAPPED:  std::cout << "bufferMapped == GL_FALSE: "       << (bufferValue == GL_FALSE)         << std::endl;     break;
-            case GL_BUFFER_SIZE:    std::cout << "bufferSize: "                     << bufferValue                       << std::endl;     break;
-            case GL_BUFFER_USAGE:   std::cout << "bufferUseage == GL_STATIC_DRAW: " << (bufferValue == GL_STATIC_DRAW)   << std::endl;     break;
-            default:                break;
+            case GL_BUFFER_ACCESS:  std::cout << "bufferAccess == GL_READ_WRITE: "  << (bufferValue == GL_READ_WRITE) << "\n";      break;
+            case GL_BUFFER_MAPPED:  std::cout << "bufferMapped == GL_FALSE: "       << (bufferValue == GL_FALSE) << "\n";           break;
+            case GL_BUFFER_SIZE:    std::cout << "bufferSize: "                     << bufferValue << "\n";                         break;
+            case GL_BUFFER_USAGE:   std::cout << "bufferUseage == GL_STATIC_DRAW: " << (bufferValue == GL_STATIC_DRAW) << "\n";     break;
+            default:                                                                                                                break;
         }
     }
+    std::cout << std::endl;
 }
 
 #endif //ERROR_CHECKING
