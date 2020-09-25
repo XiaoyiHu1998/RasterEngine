@@ -1,6 +1,6 @@
 #include "Shader.hpp"
 
-Shader::Shader(const char* fragmentShader, const char* vertexShader = "Shaders/defaultVertexShader.txt"){
+Shader::Shader(const char* fragmentShader, const char* vertexShader){
     //glCreateProgram(&programID);
 }
 
@@ -8,6 +8,6 @@ Shader::~Shader(){
     //glDeleteProgram(&programID);
 }
 
-Shader::useProgram(){
+void Shader::useProgram(){
     // glUseProgram(programID);
 }
