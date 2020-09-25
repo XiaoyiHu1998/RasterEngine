@@ -3,13 +3,13 @@
 Scene::Scene(){
 
     float vertices[] = {
-         0.0f,   0.7f,  0.0f,
-        -0.5f,  -0.5f,  0.0f,
-         0.5f,  -0.5f,  0.0f
+         0.0f,   0.7f,  0.0f,  //0
+        -0.5f,  -0.5f,  0.0f,  //1
+         0.5f,  -0.5f,  0.0f   //2
     };
 
     uint32_t indices[]{
-        1, 2, 3
+        0, 1, 2
     };
 
     std::shared_ptr<VertexBuffer> vbo(new VertexBuffer(vertices, sizeof(vertices) / sizeof(float)));
