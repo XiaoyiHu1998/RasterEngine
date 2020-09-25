@@ -2,7 +2,7 @@
 
 IndexBuffer::IndexBuffer(uint32_t* bufferData, uint32_t dataArrayCount){
     bufferCount = dataArrayCount;
-    bufferSize = static_cast<uint32_t>(dataArrayCount) * sizeof(uint32_t);
+    bufferSize = dataArrayCount * sizeof(uint32_t);
     GLCall(glGenBuffers(1, &bufferID));
     GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bufferID));
     GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, bufferSize, bufferData, GL_STATIC_DRAW));
@@ -14,7 +14,7 @@ IndexBuffer::~IndexBuffer(){
 
 void IndexBuffer::setBufferData(uint32_t* bufferData, uint32_t dataArrayCount){
     bufferCount = dataArrayCount;
-    bufferSize = static_cast<uint32_t>(dataArrayCount) * sizeof(uint32_t);
+    bufferSize = dataArrayCount * sizeof(uint32_t);
     GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bufferID));
     GLCall(glBufferData(GL_ELEMENT_ARRAY_BUFFER, bufferSize, bufferData, GL_STATIC_DRAW));
 }
