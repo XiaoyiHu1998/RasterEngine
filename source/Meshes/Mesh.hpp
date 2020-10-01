@@ -4,7 +4,7 @@
 #include "masterInclude.hpp"
 #include "VertexBuffer_GL.hpp"
 #include "IndexBuffer_GL.hpp"
-#include "Shader.hpp"
+#include "Shader_GL.hpp"
 
 class Mesh{
 private:
