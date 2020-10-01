@@ -2,8 +2,8 @@
 #define MESH_HPP
 
 #include "masterInclude.hpp"
-#include "VertexBuffer.hpp"
-#include "IndexBuffer.hpp"
+#include "VertexBuffer_GL.hpp"
+#include "IndexBuffer_GL.hpp"
 #include "Shader.hpp"
 
 class Mesh{
