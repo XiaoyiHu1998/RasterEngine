@@ -11,15 +11,15 @@ namespace RE{
 };
 
 class Shader{
-private:
+protected:
     RE::ShaderType shaderType;
     uint32_t programID;
 public:
     Shader(){}
     Shader(const char* fragmentShader, const char* vertexShader = "Shaders/defaultVertexShader.txt");
     ~Shader();
-    void useProgram();
-    void bindUniforms();
+    virtual void useProgram();
+    virtual void bindUniforms();
 };
 
 #endif //SHADER_HPP
