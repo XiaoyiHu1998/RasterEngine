@@ -7,14 +7,16 @@ static void GLClearError(){
 
 static std::string glErrorString(GLenum error){
     switch(error){
-        case GL_NO_ERROR:           return "GL_NO_ERROR";
-        case GL_INVALID_ENUM:       return "GL_INVALID_ENUM";
-        case GL_INVALID_VALUE:      return "GL_INVALID_VALUE";
-        case GL_INVALID_OPERATION:  return "GL_INVALID_OPERATION";
-        case GL_STACK_OVERFLOW:     return "GL_STACK_OVERFLOW";
-        case GL_STACK_UNDERFLOW:    return "GL_STACK_UNDERFLOW";
-        case GL_OUT_OF_MEMORY:      return "GL_OUT_OF_MEMORY";
-        default:                    return "GL_UNKOWN_ERROR";
+        case GL_NO_ERROR:                       return "GL_NO_ERROR";
+        case GL_INVALID_ENUM:                   return "GL_INVALID_ENUM";
+        case GL_INVALID_VALUE:                  return "GL_INVALID_VALUE";
+        case GL_INVALID_OPERATION:              return "GL_INVALID_OPERATION";
+        case GL_STACK_OVERFLOW:                 return "GL_STACK_OVERFLOW";
+        case GL_STACK_UNDERFLOW:                return "GL_STACK_UNDERFLOW";
+        case GL_OUT_OF_MEMORY:                  return "GL_OUT_OF_MEMORY";
+        case GL_INVALID_FRAMEBUFFER_OPERATION:  return "GL_INVALID_FRAMEBUFFER_OPERATION";
+        case GL_CONTEXT_LOST:                   return "GL_CONTEXT_LOST";
+        default:                                return "GL_UNKOWN_ERROR";
     }
 }
 
@@ -31,7 +33,7 @@ static bool GLLogCall(const char* function, const char* path, int line){
     return true;
 }
 
-#define RE_ASSERT(x) if(!(x)); //exit(-1) should be replaced with a breakstatement
+#define RE_ASSERT(x) if(!(x)) __builtin_trap(); //should be replaced with a breakstatement
 
 #ifdef RE_DEBUG //GLCall
     #define GLCall(x) GLClearError(); x; RE_ASSERT(GLLogCall(#x, __FILE__, __LINE__)) 
