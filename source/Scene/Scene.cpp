@@ -12,8 +12,8 @@ Scene::Scene(){
         0, 1, 2
     };
 
-    std::shared_ptr<VertexBuffer> vbo(new VertexBuffer_GL(vertices, sizeof(vertices) / sizeof(float)));
-    std::shared_ptr<IndexBuffer> ibo(new IndexBuffer_GL(indices, sizeof(vertices) / sizeof(float)));
+    std::shared_ptr<VertexBuffer> vbo(new VertexBuffer(vertices, sizeof(vertices) / sizeof(float)));
+    std::shared_ptr<IndexBuffer> ibo(new IndexBuffer(indices, sizeof(vertices) / sizeof(float)));
     std::shared_ptr<Shader> shader(new Shader());
     meshVector.push_back(Mesh(vbo, ibo, shader));
 }

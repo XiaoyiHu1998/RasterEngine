@@ -1,25 +1,13 @@
 #ifndef SHADER_HPP
 #define SHADER_HPP
 
-#include "masterInclude.hpp"
-
-namespace RE{
-    enum class ShaderType{
-        vertexShader,
-        fragmentShader
-    };
-};
-
 class Shader{
-protected:
-    RE::ShaderType shaderType;
-    uint32_t programID;
+private:
 public:
-    Shader(){}
-    Shader(const char* fragmentShader, const char* vertexShader = "Shaders/defaultVertexShader.txt");
+    Shader(const char* fragmentShader = "../../assets/Shaders/defaultFragmentShader.txt", const char* vertexShader = "../../assets/Shaders/defaultVertexShader.txt");
     ~Shader();
-    virtual void useProgram();
-    virtual void bindUniforms();
+    void useProgram();
+    void bindUniforms();
 };
 
 #endif //SHADER_HPP

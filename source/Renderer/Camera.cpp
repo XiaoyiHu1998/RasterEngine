@@ -6,7 +6,7 @@ Camera::Camera(){
 
 void Camera::calculateCameraMatrix(){
     cameraMatrix = glm::translate(glm::mat4(1.0f), position) * glm::rotate(glm::mat4(1.0f), rotation.x, glm::vec3(1,0,0))
-     * glm::rotate(glm::mat4(1.0f), rotation.y, glm::vec3(0,1,0)) * glm::rotate(glm::mat4(1.0f), rotation.z, glm::vec3(0,0,1));
+                 * glm::rotate(glm::mat4(1.0f), rotation.y, glm::vec3(0,1,0)) * glm::rotate(glm::mat4(1.0f), rotation.z, glm::vec3(0,0,1));
     
     cameraMatrix = glm::inverse(cameraMatrix);
     cameraUpdated = false;

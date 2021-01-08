@@ -26,7 +26,7 @@ public:
     void resetTransform();
     void addMesh();
     void addChildNode();
-}
+};
 
 
 #endif //SCENE_NODE_HPP

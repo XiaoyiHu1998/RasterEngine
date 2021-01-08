@@ -1,6 +1,6 @@
-#include "VertexBuffer_GL.hpp"
+#include "VertexBuffer.hpp"
 
-VertexBuffer_GL::VertexBuffer_GL(float* bufferData, uint32_t dataArrayCount)
+VertexBuffer::VertexBuffer(float* bufferData, uint32_t dataArrayCount)
 {
     bufferCount = dataArrayCount;
     bufferSize = dataArrayCount * sizeof(float);
@@ -9,33 +9,33 @@ VertexBuffer_GL::VertexBuffer_GL(float* bufferData, uint32_t dataArrayCount)
     GLCall(glBufferData(GL_ARRAY_BUFFER, bufferSize, bufferData, GL_STATIC_DRAW));
 }
 
-VertexBuffer_GL::~VertexBuffer_GL(){
+VertexBuffer::~VertexBuffer(){
     GLCall(glDeleteBuffers(1, &bufferID));
 }
 
-void VertexBuffer_GL::setBufferData(float* bufferData, uint32_t dataArrayCount){
+void VertexBuffer::setBufferData(float* bufferData, uint32_t dataArrayCount){
     bufferCount = dataArrayCount;
     bufferSize = dataArrayCount * sizeof(float);
     GLCall(glBindBuffer(GL_ARRAY_BUFFER, bufferID));
     GLCall(glBufferData(GL_ARRAY_BUFFER, bufferSize, bufferData, GL_STATIC_DRAW));
 }
 
-uint32_t VertexBuffer_GL::getBufferID(){
+uint32_t VertexBuffer::getBufferID(){
     return bufferID;
 }
 
-uint32_t VertexBuffer_GL::getSize(){
+uint32_t VertexBuffer::getSize(){
     return bufferSize;
 }
 
-uint32_t VertexBuffer_GL::getCount(){
+uint32_t VertexBuffer::getCount(){
     return bufferCount;
 }
 
-void VertexBuffer_GL::bind(){
+void VertexBuffer::bind(){
     GLCall(glBindBuffer(GL_ARRAY_BUFFER, bufferID));
 }
 
-void VertexBuffer_GL::unbind(){
+void VertexBuffer::unbind(){
     GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
 }

@@ -9,13 +9,13 @@ protected:
     uint32_t bufferSize;
     uint32_t bufferCount;
 public:
-    IndexBuffer(){}
-    ~IndexBuffer(){}
-    virtual uint32_t getBufferID() = 0;
-    virtual uint32_t getCount() = 0;
-    virtual void setBufferData(uint32_t* bufferData, uint32_t dataArrayCount) = 0;
-    virtual void bind() = 0;
-    virtual void unbind() = 0;
+    IndexBuffer(uint32_t* bufferData, uint32_t dataArrayCount);
+    ~IndexBuffer();
+    virtual uint32_t getBufferID();
+    virtual uint32_t getCount();
+    virtual void setBufferData(uint32_t* bufferData, uint32_t dataArrayCount);
+    virtual void bind();
+    virtual void unbind();
 };
 
 #endif //INDEX_BUFFER_HPP
