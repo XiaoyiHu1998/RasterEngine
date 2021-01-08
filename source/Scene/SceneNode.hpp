@@ -1,6 +1,9 @@
 #ifndef SCENE_NODE_HPP
 #define SCENE_NODE_HPP
 
+#include "masterInclude.hpp"
+#include "..\Meshes\Mesh.hpp"
+
 class SceneNode{
 private:
     int nodeLayer;
@@ -10,7 +13,7 @@ private:
     glm::vec3 rotation;
     glm::mat4 worldSpaceMatrix;
 
-    SceneNode child;
+    SceneNode* child;
     std::vector<Mesh> meshes;
     
     glm::mat4 setWorldSpaceMatrix();
