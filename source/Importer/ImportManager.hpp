@@ -1,7 +1,7 @@
 #ifndef IMPORT_MANAGER_HPP
 #define IMPORT_MANAGER_HPP
 
-#include <windows.h>
+#include "masterInclude.hpp"
 
 #include "Importer_OBJ.hpp"
 

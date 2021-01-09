@@ -13,11 +13,10 @@ Mesh::Mesh(std::shared_ptr<VertexBuffer> vbo, std::shared_ptr<IndexBuffer> ibo, 
 void Mesh::render(){
     vertexBuffer->bind();
     indexBuffer->bind();
+    shader->bind();
     
     GLCall(glEnableClientState(GL_VERTEX_ARRAY));
     GLCall(glVertexPointer(vPosDimensions, GL_FLOAT, 0, 0));
-
-    shader->bind();
 
     GLCall(glDrawElements(GL_TRIANGLES, indexBuffer->getCount(), GL_UNSIGNED_INT, 0));
     GLCall(glDisableClientState(GL_VERTEX_ARRAY));
