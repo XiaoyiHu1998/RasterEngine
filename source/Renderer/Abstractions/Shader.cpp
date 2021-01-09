@@ -33,37 +33,37 @@ Shader::Shader(const char* fragmentShader, const char* vertexShader){
     
     //create shaders
     int shaderSuccess;
-    char shaderLog[512];
+    char log[512];
 
     //fragmentShader
-    unsigned int fragShaderID = GLCall(glCreateShader(GL_FRAGMENT_SHADER));
-    GLCall(glShaderSource(fragShaderID, &fragShaderCode, NULL));
-    GLCall(glShaderCompile(fragShaderID));
+    uint32_t fragShaderID = glCreateShader(GL_FRAGMENT_SHADER);
+    GLCall(glShaderSource(fragShaderID, 1, &fragShaderCode, NULL));
+    GLCall(glCompileShader(fragShaderID));
     GLCall(glGetShaderiv(fragShaderID, GL_COMPILE_STATUS, &shaderSuccess));
     if(!shaderSuccess){
-        GLCall(glGetShaderInfoLog(fragShaderID, 512, NULL, shaderLog));
-        std::cout << "ERROR::SHADER::FRAGMENT::COMPILE_ERROR" << shaderLog << std::endl;
+        GLCall(glGetShaderInfoLog(fragShaderID, 512, NULL, log));
+        std::cout << "ERROR::SHADER::FRAGMENT::COMPILE_ERROR" << log << std::endl;
     }
     
     //vertexShader
-    unsigned int vertShaderID = GLCall(glCreateSHader(GL_VERTEX_SHADER));
-    GLCall(glShaderSource(vertShaderID, &vertShaderCode, NULL));
-    GLCall(glShaderCompile(vertShaderID));
+    uint32_t vertShaderID = glCreateShader(GL_VERTEX_SHADER);
+    GLCall(glShaderSource(vertShaderID, 1, &vertShaderCode, NULL));
+    GLCall(glCompileShader(vertShaderID));
     GLCall(glGetShaderiv(vertShaderID, GL_COMPILE_STATUS, &shaderSuccess));
-    if(!shaderSuccesss){
-        GLCall(glGetShaderInfoLog(vertShaderID, 512, NULL, shaderLog));
-        std::cout << "ERROR::SHADER::FRAGMENT::COMPILE_ERROR" << shaderLog << std::endl;
+    if(!shaderSuccess){
+        GLCall(glGetShaderInfoLog(vertShaderID, 512, NULL, log));
+        std::cout << "ERROR::SHADER::VERTEX::COMPILE_ERROR" << log << std::endl;
     }
 
     //shaderProgram
-    unsigned int shaderProgramID = GLCall(glCreateProgram());
+    uint32_t shaderProgramID = glCreateProgram();
     GLCall(glAttachShader(shaderProgramID, fragShaderID));
     GLCall(glAttachShader(shaderProgramID, vertShaderID));
     GLCall(glLinkProgram(shaderProgramID));
-    GLCall(glGetShaderiv(shaderProgramID, GL_LINK_STATUS, &shaderSuccess));
+    GLCall(glGetProgramiv(shaderProgramID, GL_LINK_STATUS, &shaderSuccess));
     if(!shaderSuccess){
-        GLCall(glGetShaderInfoLog(shaderProgramID, 512, NULL, shaderLog));
-        std::cout << "ERROR::SHADER::FRAGMENT::COMPILE_ERROR" << shaderLog << std::endl;
+        GLCall(glGetProgramInfoLog(shaderProgramID, 512, NULL, log));
+        std::cout << "ERROR::SHADER::FRAGMENT::COMPILE_ERROR" << log << std::endl;
     }
     
     GLCall(glDeleteShader(fragShaderID));
@@ -73,22 +73,26 @@ Shader::Shader(const char* fragmentShader, const char* vertexShader){
     //glCreateProgram(&programID);
 }
 
-void Shader::setBool(const std::string& uniformName, bool value){
-    GLCall(glUniform1i(glGetUniformLocation(shaderID, uniformName.c_str()), std::static_cast<int>(value)));
+Shader::~Shader(){
+    GLCall(glDeleteProgram(shaderID));
+}
+
+void Shader::bind(){
+    GLCall(glUseProgram(shaderID));
+}
+
+void Shader::unbind(){
+    GLCall(glUseProgram(0));
 }
 
 void Shader::setInt(const std::string& uniformName, int value){
     GLCall(glUniform1i(glGetUniformLocation(shaderID, uniformName.c_str()), value));
 }
 
+void Shader::setBool(const std::string& uniformName, bool value){
+    GLCall(glUniform1i(glGetUniformLocation(shaderID, uniformName.c_str()), (int)value));
+}
+
 void Shader::setFloat(const std::string& uniformName, float value){
     GLCall(glUniform1f(glGetUniformLocation(shaderID, uniformName.c_str()), value));
-}
-
-Shader::~Shader(){
-    GLCall(glDeleteProgram(shaderID));
-}
-
-void Shader::useProgram(){
-    GLCall(glUseProgram(shaderID));
 }

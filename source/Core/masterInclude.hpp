@@ -1,6 +1,10 @@
 #ifndef MASTERINCLUDE_HPP
 #define MASTERINCLUDE_HPP
 
+#define NOMINMAX
+#include <windows.h>
+#undef NOMINMAX
+
 #include "IMGUI/imgui.h"
 #include "IMGUI/imgui_impl_glfw.h"
 #include "IMGUI/imgui_impl_opengl3.h"

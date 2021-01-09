@@ -9,12 +9,14 @@ class Shader{
 private:
     uint32_t shaderID;
 public:
-    Shader(const char* fragmentShader = "D:\\Git_repos\\RasterEngine\\source\\Renderer\\Abstractions\\defaultFragmentShader.txt", const char* vertexShader = "D:\\Git_repos\\RasterEngine\\source\\Renderer\\Abstractions\\defaultVertexShader.txt");
-    // Shader(const char* fragmentShader = "../../assets/Shaders/defaultFragmentShader.txt", const char* vertexShader = "../../assets/Shaders/defaultVertexShader.txt");
+// D:\Repositories\RasterEngine\assets\shaders\defaultFragmentShader.txt
+    // Shader(const char* fragmentShader = "..\\..\\assets\\shaders\\defaultFragmentShader.txt", const char* vertexShader = "..\\..\\assets\\shaders\\defaultVertexShader.txt");
+    Shader(const char* fragmentShader = "..\\assets\\shaders\\defaultFragmentShader.txt", const char* vertexShader = "..\\assets\\shaders\\defaultVertexShader.txt");
     ~Shader();
-    void useProgram();
-    void setBool(const std::string& uniformName, bool value);
+    void bind();
+    void unbind();
     void setInt(const std::string& uniformName, int value);
+    void setBool(const std::string& uniformName, bool value);
     void setFloat(const std::string& uniformName, float value);
     void bindUniforms();
 };

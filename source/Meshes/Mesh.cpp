@@ -17,7 +17,7 @@ void Mesh::render(){
     GLCall(glEnableClientState(GL_VERTEX_ARRAY));
     GLCall(glVertexPointer(vPosDimensions, GL_FLOAT, 0, 0));
 
-    shader->useProgram();
+    shader->bind();
 
     GLCall(glDrawElements(GL_TRIANGLES, indexBuffer->getCount(), GL_UNSIGNED_INT, 0));
     GLCall(glDisableClientState(GL_VERTEX_ARRAY));
