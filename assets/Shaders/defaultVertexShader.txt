@@ -1,11 +1,12 @@
 #version 330
-layout(location = 0)in vec4 vert;
+layout(location = 0)in vec4 vPosition;
 
-in vec4 vPosition;
-//uniform mat4 projectionMatrix;
-out vec4 gl_Position;
+out vec4 vertexPos;
+uniform vec4 location;
+uniform mat4 projectionMatrix;
 
 void main()
 {
     gl_Position = vPosition;
+    vertexPos = gl_Position + location;
 }
