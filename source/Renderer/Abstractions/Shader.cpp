@@ -96,3 +96,7 @@ void Shader::setBool(const std::string& uniformName, bool value){
 void Shader::setFloat(const std::string& uniformName, float value){
     GLCall(glUniform1f(glGetUniformLocation(shaderID, uniformName.c_str()), value));
 }
+
+void Shader::setUniform4f(const std::string& uniformName, float x, float y, float z, float w){
+    GLCall(glUniform4f(glGetUniformLocation(shaderID, uniformName.c_str()), x, y, z, w));
+}

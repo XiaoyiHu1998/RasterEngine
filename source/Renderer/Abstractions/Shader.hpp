@@ -18,6 +18,7 @@ public:
     void setInt(const std::string& uniformName, int value);
     void setBool(const std::string& uniformName, bool value);
     void setFloat(const std::string& uniformName, float value);
+    void setUniform4f(const std::string& uniformName, float x, float y, float z, float w);
     void bindUniforms();
 };
 

@@ -8,6 +8,10 @@ Mesh::Mesh(std::shared_ptr<VertexBuffer> vbo, std::shared_ptr<IndexBuffer> ibo, 
         vPosDimensions = 3;
         vNormalDimensions = 3;
         vTexDimensions = 2;
+        for(int i = 0; i < 4; i++){
+            position[i] = 0;
+        }
+        direction = true;
     }
 
 void Mesh::render(){
@@ -20,4 +24,28 @@ void Mesh::render(){
 
     GLCall(glDrawElements(GL_TRIANGLES, indexBuffer->getCount(), GL_UNSIGNED_INT, 0));
     GLCall(glDisableClientState(GL_VERTEX_ARRAY));
+    update();
+}
+
+// temp function for little animation test
+void Mesh::update(){
+    if(direction){
+        position[1] -= 0.016;
+        position[2] -= 0.016;
+        position[3] -= 0.016;
+        position[4] -= 0.016;
+        if(position[2] < -1){
+            direction = false;
+        }
+    }
+    else{
+        position[1] += 0.016;
+        position[2] += 0.016;
+        position[3] += 0.016;
+        position[4] += 0.016;
+        if(position[2] > 1){
+            direction = true;
+        }
+    }
+    shader->setUniform4f("location", position[0], position[1], position[2], position[3]);
 }
