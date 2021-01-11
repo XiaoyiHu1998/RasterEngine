@@ -30,22 +30,23 @@ void Mesh::render(){
 // temp function for little animation test
 void Mesh::update(){
     if(direction){
-        position[1] -= 0.016;
-        position[2] -= 0.016;
-        position[3] -= 0.016;
-        position[4] -= 0.016;
-        if(position[2] < -1){
+        position[0] -= 0.016;
+        position[1] -= 0.026;
+        position[2] -= 0.010;
+        position[3] -= 0.010;
+        if(position[0] < 0){
             direction = false;
         }
     }
     else{
-        position[1] += 0.016;
-        position[2] += 0.016;
-        position[3] += 0.016;
-        position[4] += 0.016;
-        if(position[2] > 1){
+        position[0] += 0.016;
+        position[1] += 0.026;
+        position[2] += 0.010;
+        position[3] += 0.010;
+        if(position[0] > 1){
             direction = true;
         }
     }
     shader->setUniform4f("location", position[0], position[1], position[2], position[3]);
+    // std::cout << glGetString(GL_EXTENSIONS) << std::endl;
 }
