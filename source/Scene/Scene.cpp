@@ -21,5 +21,11 @@ Scene::Scene(){
 void Scene::render(){
     for(int i = 0; i < meshVector.size(); i++){
         meshVector[i].render();
-    }   
+    }
+
+    for(int i = 0; i < renderLayers.size(); i++){
+        if(layerVisibility[i]){
+            renderLayers[i].render();
+        }
+    }
 }
