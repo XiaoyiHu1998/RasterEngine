@@ -6,6 +6,7 @@
 
 class RendererManager{
 private:
+    Camera camera;
     SceneRenderer scene;
     UIRenderer ui;
 
@@ -13,7 +14,6 @@ private:
 public:
     RendererManager(GLFWwindow* window, std::shared_ptr<Scene> scenePointer, std::shared_ptr<ImportManager> importManagerPointer);
     void init();
-    void renderScene();
     void renderProgramWindow();
 };
 

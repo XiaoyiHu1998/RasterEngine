@@ -9,12 +9,13 @@ void RendererManager::init(){
     scene.createFrameBuffer();
 }
 
-void RendererManager::renderScene(){
-    colorTexture = scene.renderScene();
-}
-
 void RendererManager::renderProgramWindow(){
+    colorTexture = scene.renderScene(camera);
+
     ui.drawUI(colorTexture);
     ui.drawToScreen();
-    scene.setRenderResolution(ui.getViewportSize());
+
+    ImVec2 viewportSize = ui.getViewportSize();
+    camera.setCameraAspectRatio(viewportSize.x, viewportSize.y);
+    scene.setRenderResolution(viewportSize);
 }

@@ -134,3 +134,8 @@
 #include "matrix.hpp"
 #include "vector_relational.hpp"
 #include "integer.hpp"
+
+#include "GLM\gtc\matrix_access.hpp"
+#include "GLM\gtc\matrix_integer.hpp"
+#include "GLM\gtc\matrix_inverse.hpp"
+#include "GLM\gtc\matrix_transform.hpp"

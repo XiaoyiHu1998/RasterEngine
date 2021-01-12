@@ -3,19 +3,30 @@
 	"tasks": [
 		{
 			"type": "shell",
-			"label": "Build RasterEngine",
-			"command": "F:\\TDM-GCC\\bin\\g++.exe",			//desktop
-			// "command": "C:\\MinGW\\bin\\g++.exe",  	//laptop
+			"label": "Build RasterEngine Debug",
+			// "command": "F:\\TDM-GCC\\bin\\g++.exe",			//desktop
+			"command": "C:\\MinGW\\bin\\g++.exe",  	//laptop
 			"args": [
-				"-g",
+				"-ggdb",
 				"${workspaceFolder}\\source\\Core\\main.cpp",
 				"${workspaceFolder}\\source\\Core\\RasterEngine.cpp",
+
 				"${workspaceFolder}\\source\\Renderer\\RendererManager.cpp",
 				"${workspaceFolder}\\source\\Renderer\\SceneRenderer.cpp",
 				"${workspaceFolder}\\source\\Renderer\\UIRenderer.cpp",
+				"${workspaceFolder}\\source\\Renderer\\Camera.cpp",
+				"${workspaceFolder}\\source\\Renderer\\Abstractions\\VertexBuffer.cpp",
+				"${workspaceFolder}\\source\\Renderer\\Abstractions\\IndexBuffer.cpp",
+				"${workspaceFolder}\\source\\Renderer\\Abstractions\\Shader.cpp",
+
 				"${workspaceFolder}\\source\\Importer\\ImportManager.cpp",
 				"${workspaceFolder}\\source\\Importer\\Importer_OBJ.cpp",
+
 				"${workspaceFolder}\\source\\Meshes\\PreMesh.cpp",
+				"${workspaceFolder}\\source\\Meshes\\Mesh.cpp",
+
+				"${workspaceFolder}\\source\\Scene\\Scene.cpp",
+
 				"-o",
 				"${workspaceFolder}\\bin\\RasterEngine.exe",
 
@@ -33,6 +44,7 @@
 				"-I${workspaceFolder}\\source\\Core",
 				"-I${workspaceFolder}\\source\\Importer",
 				"-I${workspaceFolder}\\source\\Renderer",
+				"-I${workspaceFolder}\\source\\Renderer\\Abstractions",
 				"-I${workspaceFolder}\\source\\Meshes",
 				"-I${workspaceFolder}\\source\\Scene",
 				
@@ -50,8 +62,87 @@
 				"-lcomdlg32",
 				
 				//misc
-				"-DGLEW_STATIC",	//glew static	
-				"-O3",				//optimization
+				"-DRE_DEBUG",	    //Debug build
+				"-DGLEW_STATIC",	//glew static
+				"-Og",				//optimization
+				"-m32",				//32bit binary
+				"-std=c++17"		//c++17
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+        },
+        {
+			"type": "shell",
+			"label": "Build RasterEngine Release",
+			// "command": "F:\\TDM-GCC\\bin\\g++.exe",			//desktop
+			"command": "C:\\MinGW\\bin\\g++.exe",  	//laptop
+			"args": [
+				"-g",
+				"${workspaceFolder}\\source\\Core\\main.cpp",
+				"${workspaceFolder}\\source\\Core\\RasterEngine.cpp",
+
+				"${workspaceFolder}\\source\\Renderer\\RendererManager.cpp",
+				"${workspaceFolder}\\source\\Renderer\\SceneRenderer.cpp",
+				"${workspaceFolder}\\source\\Renderer\\UIRenderer.cpp",
+				"${workspaceFolder}\\source\\Renderer\\Camera.cpp",
+				"${workspaceFolder}\\source\\Renderer\\Abstractions\\VertexBuffer.cpp",
+				"${workspaceFolder}\\source\\Renderer\\Abstractions\\IndexBuffer.cpp",
+				"${workspaceFolder}\\source\\Renderer\\Abstractions\\Shader.cpp",
+
+				"${workspaceFolder}\\source\\Importer\\ImportManager.cpp",
+				"${workspaceFolder}\\source\\Importer\\Importer_OBJ.cpp",
+
+				"${workspaceFolder}\\source\\Meshes\\PreMesh.cpp",
+				"${workspaceFolder}\\source\\Meshes\\Mesh.cpp",
+
+				"${workspaceFolder}\\source\\Scene\\Scene.cpp",
+
+				"-o",
+				"${workspaceFolder}\\bin\\RasterEngine.exe",
+
+				/*Vendor Paths*/
+				"${workspaceFolder}\\dependencies\\IMGUI\\imgui.cpp",
+				"${workspaceFolder}\\dependencies\\IMGUI\\imgui_demo.cpp",
+				"${workspaceFolder}\\dependencies\\IMGUI\\imgui_draw.cpp",
+				"${workspaceFolder}\\dependencies\\IMGUI\\imgui_impl_glfw.cpp",
+				"${workspaceFolder}\\dependencies\\IMGUI\\imgui_impl_opengl3.cpp",
+				"${workspaceFolder}\\dependencies\\IMGUI\\imgui_widgets.cpp",
+
+				/*Include Paths*/
+				"-I${workspaceFolder}\\dependencies",
+				"-I${workspaceFolder}\\dependencies\\IMGUI",
+				"-I${workspaceFolder}\\source\\Core",
+				"-I${workspaceFolder}\\source\\Importer",
+				"-I${workspaceFolder}\\source\\Renderer",
+				"-I${workspaceFolder}\\source\\Renderer\\Abstractions",
+				"-I${workspaceFolder}\\source\\Meshes",
+				"-I${workspaceFolder}\\source\\Scene",
+				
+				/*Library Paths*/
+				"-L${workspaceFolder}\\dependencies\\GL",
+				"-L${workspaceFolder}\\dependencies\\GLFW",
+
+				/*libraries*/
+				"-lglew32s",
+				"-lglfw3",
+				"-lopengl32",
+				"-lUser32",
+				"-lGdi32",
+				"-lShell32",
+				"-lcomdlg32",
+				
+				//misc
+				"-DRE_DEBUG",	    //Debug build
+				"-DGLEW_STATIC",	//glew static
+				"-Og",				//optimization
 				"-m32",				//32bit binary
 				"-std=c++17"		//c++17
 			],

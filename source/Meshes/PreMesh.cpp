@@ -1,4 +1,4 @@
-#include "Mesh.hpp"
+#include "PreMesh.hpp"
 
 PreMesh::PreMesh(){
     vertexPositionDimensions = -1;

@@ -1,6 +1,8 @@
 #ifndef IMPORT_MANAGER_HPP
 #define IMPORT_MANAGER_HPP
 
+#include "masterInclude.hpp"
+
 #include "Importer_OBJ.hpp"
 
 class ImportManager{

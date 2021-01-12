@@ -11,7 +11,3 @@ RasterEngine::RasterEngine(GLFWwindow* window):
 void RasterEngine::draw(){
     rendererManager.renderProgramWindow();
 }
-
-void RasterEngine::drawSceneToTexture(){
-    rendererManager.renderScene();
-}

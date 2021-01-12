@@ -12,15 +12,17 @@
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"
 #include "GLM/glm.hpp"
+#include "GLM/gtc/type_ptr.hpp"
 
 #include <thread>
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include <string>
-#include <functional>
+// #include <functional>
 
 #include "Primitives.hpp"
+#include "errorChecking.hpp"
 
 #define WINDOW_RES_X 1366
 #define WINDOW_RES_Y 768

@@ -2,46 +2,27 @@
 #define MESH_HPP
 
 #include "masterInclude.hpp"
+#include "VertexBuffer.hpp"
+#include "IndexBuffer.hpp"
+#include "Shader.hpp"
 
 class Mesh{
 private:
-    int vertexPositionDimensions;
-    int vertexTextureCoordinateCount;
-    int vertexNormalComponentCount;
-
-    std::vector<float> vertexBuffer;
+    std::shared_ptr<VertexBuffer> vertexBuffer;
+    std::shared_ptr<IndexBuffer> indexBuffer;
+    std::shared_ptr<Shader> shader;
+    
+    uint32_t vPosDimensions;
+    uint32_t vNormalDimensions;
+    uint32_t vTexDimensions;
+    float position[4];
+    bool direction;
 public:
     Mesh(){}
-    void render(){}
-};
-
-class PreMesh{
-private:
-    int vertexPositionDimensions;
-    int vertexTextureCoordinateCount;
-    int vertexNormalComponentCount;
-    
-    std::vector<float> vertexPositions;
-    std::vector<float> vertexTexturePositions;
-    std::vector<float> vertexNormals;
-
-    std::vector<Vertex> vertexArray;
-    std::vector<Point> pointArray;
-    std::vector<line> lineArray;
-    std::vector<triangle> triangleArray;
-    std::vector<quad> quadArray;
-public:
-    PreMesh();
-    Mesh generateMesh();
-
-    void addVertexPosition(float position);
-    void addVertexTexturePosition(float coordinate);
-    void addVertexNormalComponent(float normalComponent);
-
-    void addPoint(const std::string& inputLine);
-    void addLine(const std::string& inputLine);
-    void addTriangle(const std::string& inputLine);
-    void addQuad(const std::string& inputLine);
+    Mesh(std::shared_ptr<VertexBuffer> vbo, std::shared_ptr<IndexBuffer> ibo, std::shared_ptr<Shader> shader);
+    void render();
+    void render(const glm::mat4& projectionMatrix);
+    void update();
 };
 
 #endif //MESH_HPP
