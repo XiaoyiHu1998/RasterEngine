@@ -27,6 +27,20 @@ void Mesh::render(){
     update();
 }
 
+void Mesh::render(const glm::mat4& projectionMatrix){
+    vertexBuffer->bind();
+    indexBuffer->bind();
+    shader->bind();
+    shader->setMatrix4f("projectionMatrix", projectionMatrix);
+    
+    GLCall(glEnableClientState(GL_VERTEX_ARRAY));
+    GLCall(glVertexPointer(vPosDimensions, GL_FLOAT, 0, 0));
+
+    GLCall(glDrawElements(GL_TRIANGLES, indexBuffer->getCount(), GL_UNSIGNED_INT, 0));
+    GLCall(glDisableClientState(GL_VERTEX_ARRAY));
+    update();
+}
+
 // temp function for little animation test
 void Mesh::update(){
     if(direction){
@@ -48,5 +62,4 @@ void Mesh::update(){
         }
     }
     shader->setUniform4f("location", position[0], position[1], position[2], position[3]);
-    // std::cout << glGetString(GL_EXTENSIONS) << std::endl;
 }

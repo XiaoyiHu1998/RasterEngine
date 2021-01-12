@@ -21,6 +21,7 @@ public:
     Mesh(){}
     Mesh(std::shared_ptr<VertexBuffer> vbo, std::shared_ptr<IndexBuffer> ibo, std::shared_ptr<Shader> shader);
     void render();
+    void render(const glm::mat4& projectionMatrix);
     void update();
 };
 
