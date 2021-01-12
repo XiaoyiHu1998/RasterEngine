@@ -11,11 +11,11 @@ private:
     SceneNode* child;
     Mesh mesh;
 
-    glm::vec3 position;
-    glm::vec3 scale;
-    glm::vec3 rotation;
+    glm::vec4 position;
+    glm::vec4 rotation;
+    glm::vec4 scaling;
     glm::mat4 parentMatrix;
-    glm::mat4 worldSpaceMatrix;
+    glm::mat4 localTransformMatrix;
 
     
     glm::mat4 setWorldSpaceMatrix();
@@ -23,12 +23,12 @@ public:
     SceneNode();
     void render(glm::mat4& parentTransformMatrix);
     void transpose();
-    void translate(const glm::vec4& translation);
-    void setLocation(const glm::vec4& translation);
-    void rotate(const glm::vec4& rotation);
-    void setRotation(const glm::vec4& rotation);
-    void scale(const glm::vec4& scale);
-    void setScale(const glm::vec4& scale);
+    void translate(const glm::vec4& translationVec4);
+    void setLocation(const glm::vec4& translationVec4);
+    void rotate(const glm::vec4& rotationVec4);
+    void setRotation(const glm::vec4& rotationVec4);
+    void scale(const glm::vec4& scaleVec4);
+    void setScale(const glm::vec4& scaleVec4);
     void transform(const glm::mat4& transform);
     void setTransform(const glm::mat4& transform);
     void resetTransform(const glm::mat4& transform);
