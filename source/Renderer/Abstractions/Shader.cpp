@@ -97,6 +97,10 @@ void Shader::setFloat(const std::string& uniformName, float value){
     GLCall(glUniform1f(glGetUniformLocation(shaderID, uniformName.c_str()), value));
 }
 
+void Shader::setMatrix4f(const std::string& uniformName, const glm::mat4& projectionMatrix){
+    GLCall(glUniformMatrix4fv(glGetUniformLocation(shaderID, uniformName.c_str()), 1, GL_FALSE, glm::value_ptr(projectionMatrix)));
+}
+
 void Shader::setUniform4f(const std::string& uniformName, float x, float y, float z, float w){
     GLCall(glUniform4f(glGetUniformLocation(shaderID, uniformName.c_str()), x, y, z, w));
 }
