@@ -13,7 +13,7 @@ SceneNode::SceneNode(int nodeDepth, bool visible, Mesh mesh, const glm::mat4& pa
         localTransformMatrix = glm::translate(glm::rotate(glm::scale(localTransformMatrix, scale), rotation), position);
     }
 
-void SceneNode::render(glm::mat4& parentTransformMatrix){
+void SceneNode::render(const glm::mat4& parentTransformMatrix){
     glm::mat4 nodeMatrix = parentTransformMatrix * localTransformMatrix;
     mesh.render(nodeMatrix);
     child->render();

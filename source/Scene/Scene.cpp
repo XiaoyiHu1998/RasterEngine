@@ -23,9 +23,10 @@ void Scene::render(){
         meshVector[i].render();
     }
 
-    for(int i = 0; i < renderLayers.size(); i++){
-        if(layerVisibility[i]){
-            renderLayers[i];
-        }
-    }
-}
+    // for(int i = 0; i < renderLayers.size(); i++){
+    //     glm::mat4 defaultMatrix = glm::mat4(1);
+    //     if(layerVisibility[i]){
+    //         renderLayers[i];
+    //     }
+    // }
+}  

@@ -21,7 +21,7 @@ private:
     glm::mat4 setWorldSpaceMatrix();
 public:
     SceneNode();
-    void render(glm::mat4& parentTransformMatrix);
+    void render(const glm::mat4& parentTransformMatrix);
     void transpose();
     void translate(const glm::vec4& translationVec4);
     void setLocation(const glm::vec4& translationVec4);
