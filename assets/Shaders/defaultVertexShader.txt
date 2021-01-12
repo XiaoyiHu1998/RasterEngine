@@ -8,5 +8,5 @@ uniform mat4 projectionMatrix;
 void main()
 {
     gl_Position = vPosition + (location / 5);
-    vertexPos = vPosition + (location);
+    vertexPos = vPosition + (location); 
 }
