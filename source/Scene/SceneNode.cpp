@@ -59,8 +59,8 @@ void SceneNode::setScale(const glm::vec4& scaleVec4){
     child->scale(scaled);
 }
 
-void SceneNode::transform(const glm::mat4& transformVec4);
-void SceneNode::setTransform(const glm::mat4& transformVec4);
+void SceneNode::transform(const glm::mat4& transformVec4){}
+void SceneNode::setTransform(const glm::mat4& transformVec4){}
 void SceneNode::resetTransform(const glm::mat4& transformVec4){
     translation = glm::vec4(0) - position;
     rotation = glm::vec4(0) - rotation;
@@ -76,5 +76,5 @@ void SceneNode::resetTransform(const glm::mat4& transformVec4){
 }
 
 // void SceneNode::addMesh(Mesh mesh);
-void SceneNode::addChildNode();
-void SceneNode::addChildNodeAtDepth();
+void SceneNode::addChildNode(){}
+void SceneNode::addChildNodeAtDepth(){}
