@@ -18,6 +18,7 @@ void Mesh::render(){
     vertexBuffer->bind();
     indexBuffer->bind();
     shader->bind();
+    shader->setMatrix4f("mvpMatrix", glm::mat4(1.0f));
     
     GLCall(glEnableClientState(GL_VERTEX_ARRAY));
     GLCall(glVertexPointer(vPosDimensions, GL_FLOAT, 0, 0));
@@ -27,11 +28,11 @@ void Mesh::render(){
     update();
 }
 
-void Mesh::render(const glm::mat4& projectionMatrix){
+void Mesh::render(const glm::mat4& mvpMatrix){
     vertexBuffer->bind();
     indexBuffer->bind();
     shader->bind();
-    shader->setMatrix4f("projectionMatrix", projectionMatrix);
+    shader->setMatrix4f("mvpMatrix", mvpMatrix);
     
     GLCall(glEnableClientState(GL_VERTEX_ARRAY));
     GLCall(glVertexPointer(vPosDimensions, GL_FLOAT, 0, 0));

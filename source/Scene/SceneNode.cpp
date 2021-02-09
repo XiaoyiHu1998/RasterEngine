@@ -1,81 +1,103 @@
 #include "SceneNode.hpp"
 
-SceneNode::SceneNode(int nodeDepth, bool visible, Mesh mesh, const glm::mat4& parentsMatrix):
+SceneNode::SceneNode(int nodeDepth, bool visible, Mesh mesh):
     nodeDepth{nodeDepth},
-    visibility{visible},
+    visible{visible},
     mesh{mesh},
-    parentsMatrix{parentsMatrix}
+    child(nullptr),
+    transformed{false}
     {
-        position = glm::vec4(0,0,0,1);
-        rotation = glm::vec4(0,0,0,1);
-        scale = glm::vec4(1,1,1,1);
-        localTransformMatrix = glm::mat4(1.0f);
-        localTransformMatrix = glm::translate(glm::rotate(glm::scale(localTransformMatrix, scale), rotation), position);
+        position = glm::vec3(0,0,0);
+        rotation = glm::vec3(0,0,0);
+        scaling = glm::vec3(1,1,1);
+        modelMatrix = glm::mat4(1.0f);
     }
 
-void SceneNode::render(const glm::mat4& parentTransformMatrix){
-    glm::mat4 nodeMatrix = parentTransformMatrix * localTransformMatrix;
+glm::mat4 SceneNode::calcModelMatrix(){
+    glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), position);
+    glm::mat4 rotationXMatrix = glm::rotate(translationMatrix, rotation.x, glm::vec3(1,0,0));
+    glm::mat4 rotationYMatrix = glm::rotate(rotationXMatrix, rotation.y, glm::vec3(0,1,0));
+    glm::mat4 rotationZMatrix = glm::rotate(rotationYMatrix, rotation.z, glm::vec3(0,0,1));
+    glm::mat4 scalingMatrix = glm::scale(rotationZMatrix, scaling);
+    return scalingMatrix;
+}
+
+//needs to be optimized by multiplying camera and projection matrices first before sending it down the line.
+void SceneNode::render(const glm::mat4& viewMatrix, const glm::mat4& projectionMatrix){
+    if(transformed){
+        modelMatrix = calcModelMatrix();
+        transformed = false;
+    }
+    glm::mat4 nodeMatrix = projectionMatrix * viewMatrix * modelMatrix;
     mesh.render(nodeMatrix);
-    child->render();
+    child->render(viewMatrix, projectionMatrix);
 }
 
 void SceneNode::transpose(){
-    glm::transpose(localTransformMatrix);
+    glm::transpose(modelMatrix);
 }
 
-void SceneNode::translate(const glm::vec4& translationVec4){
-    position += translation;
-    localTransformMatrix = glm::translate(localTransformMatrix, translation);
-    child->translate(translation);
+void SceneNode::translate(const glm::vec3& translationVec3){
+    transformed = true;
+    position += translationVec3;
+    child->translate(translationVec3);
 }
 
-void SceneNode::setLocation(const glm::vec4& translationVec4){
-    glm::vec4 displacement = translation - position;
-    position = translation;
-    localTransformMatrix = glm::translate(glm::rotate(glm::scale(localTransformMatrix, scale), rotation), position);
+void SceneNode::setLocation(const glm::vec3& translationVec3){
+    transformed = true;
+    glm::vec3 displacement = translationVec3 - position;
+    position = translationVec3;
     child->translate(displacement);
 }
 
-void SceneNode::rotate(const glm::vec4& rotationVec4){
-    rotation += rotationVec4;
-    localTransformMatrix = glm::rotate(localTransformMatrix, rotationVec4);
+void SceneNode::rotate(const glm::vec3& rotationVec3){
+    transformed = true;
+    rotation += rotationVec3;
+    child->rotate(rotationVec3);
 }
 
-void SceneNode::setRotation(const glm::vec4& rotationVec4){
-    rotated = rotationVec4 - rotation;
-    rotation = rotationVec4;
-    localTransformMatrix = glm::translate(glm::rotate(glm::scale(localTransformMatrix, scale), rotation), position);
+void SceneNode::setRotation(const glm::vec3& rotationVec3){
+    transformed = true;
+    glm::vec3 rotated = rotationVec3 - rotation;
+    rotation = rotationVec3;
     child->rotate(rotated);
 }
 
-void SceneNode::scale(const glm::vec4& scaleVec4){
-    scaling += scaleVec4;
-    localTransformMatrix = glm::scale(localTransformMatrix, scale);
+void SceneNode::scale(const glm::vec3& scaleVec3){
+    transformed = true;
+    scaling += scaleVec3;
+    child->scale(scaleVec3);
 }
 
-void SceneNode::setScale(const glm::vec4& scaleVec4){
-    scaled = scaleVec4 - scaling;
-    scaling = scaleVec4;
-    localTransformMatrix = glm::translate(glm::rotate(glm::scale(localTransformMatrix, scale), rotation), position);
+void SceneNode::setScale(const glm::vec3& scaleVec3){
+    transformed = true;
+    glm::vec3 scaled = scaleVec3 - scaling;
+    scaling = scaleVec3;
     child->scale(scaled);
 }
 
-void SceneNode::transform(const glm::mat4& transformVec4){}
-void SceneNode::setTransform(const glm::mat4& transformVec4){}
-void SceneNode::resetTransform(const glm::mat4& transformVec4){
-    translationDone = glm::vec4(0) - position;
-    rotationDone = glm::vec4(0) - rotation;
-    scalingDone = glm::vec4(0) - scaling;
-    position = glm::vec4(0);
-    rotation = glm::Vec4(0);
-    scaling = glm::vec4(0);
-    localTransformMatrix = glm::mat4(1);
+// void SceneNode::transform(const glm::mat4& transformVec3){}
+// void SceneNode::setTransform(const glm::mat4& transformVec3){}
+
+void SceneNode::resetTransform(const glm::mat4& transformVec3){
+    transformed = true;
+    glm::vec3 translationDone = glm::vec3(0) - position;
+    glm::vec3 rotationDone = glm::vec3(0) - rotation;
+    glm::vec3 scalingDone = glm::vec3(0) - scaling;
+    position = glm::vec3(0);
+    rotation = glm::vec3(0);
+    scaling = glm::vec3(0);
 
     child->translate(translationDone);
     child->rotate(rotationDone);
     child->scale(scalingDone);
 }
 
-// void SceneNode::addMesh(Mesh mesh);
-void SceneNode::addChildNode(){}
-void SceneNode::addChildNodeAtDepth(){}
+// // void SceneNode::addMesh(Mesh mesh);
+//TODO: needs to check if buffers get destroyed due to pass by copy
+void SceneNode::addChildNode(Mesh mesh){
+    if(child = nullptr){ 
+        child = std::shared_ptr<SceneNode>(new SceneNode(nodeDepth + 1, true, mesh));
+    }
+}
+// void SceneNode::addChildNodeAtDepth(){}
