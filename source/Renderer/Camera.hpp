@@ -15,13 +15,12 @@ private:
     glm::vec3 position;
     glm::vec3 rotation;
 
-    glm::mat4 cameraMatrix;
+    glm::mat4 viewMatrix;
     glm::mat4 projectionMatrix;
     glm::mat4 screenSpaceMatrix;
 
-    void calculateCameraMatrix();
-    void calculateProjectionMatrix();
-    void calculateScreenSpaceMatrix();
+    void updateViewMatrix();
+    void updateProjectionMatrix();
 public:
     Camera();
     void setPosition(const glm::vec3& newPosition);
@@ -33,7 +32,8 @@ public:
     void setCameraAspectRatio(float width, float height);
     void setCameraFovY(float fovY);
     void setCameraFovX(float fovY);
-    glm::mat4 getScreenSpaceMatrix();
+    glm::mat4 getProjectionMatrix();
+    glm::mat4 getViewMatrix();
 };
 
 
