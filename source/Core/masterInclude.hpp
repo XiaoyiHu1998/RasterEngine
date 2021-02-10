@@ -11,11 +11,7 @@
 #include <stdio.h>
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"
-// #include "GLM/glm.hpp"
-#include "GLM/mat4x4.hpp"
-#include "GLM/vec3.hpp"
-#include "GLM/vec4.hpp"
-#include "GLM/trigonometric.hpp"
+#include "GLM/glm.hpp"
 #include "GLM/ext/matrix_transform.hpp"
 #include "GLM/gtc/type_ptr.hpp"
 
@@ -24,7 +20,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
-// #include <functional>
+#include <functional>
 
 #include "Primitives.hpp"
 #include "errorChecking.hpp"
