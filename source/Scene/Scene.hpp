@@ -4,30 +4,18 @@
 #include "masterInclude.hpp"
 #include "SceneNode.hpp"
 #include "Mesh.hpp"
+#include "Camera.hpp"
 
 class Scene{
 private:
     std::vector<Mesh> meshVector;
     std::vector<SceneNode> renderLayers;
     std::vector<bool> layerVisibility;
-
-    bool cameraTransformed;
-    bool projectionTransformed;
-    glm::mat4 viewMatrix;
-    glm::mat4 projectionMatrix;
     glm::mat4 rotationMatrix;
-
-    glm::vec3 cameraPosition;
-    glm::vec3 cameraRotation;
-    glm::vec3 cameraScaling;
-
-
-    glm::mat4 calcViewMatrix();
-    glm::mat4 calcProjectionMatrix();
+    Camera camera;
 public:
     Scene();
     void render();
-
 };
 
 #endif //SCENE_HPP
