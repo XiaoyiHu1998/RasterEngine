@@ -20,7 +20,7 @@ Output=-o $(Bin)/RasterEngine.exe
 
 Objects= main.o RasterEngine.o RendererManager.o SceneRenderer.o UIRenderer.o Camera.o VertexBuffer.o IndexBuffer.o Shader.o ImportManager.o Importer_OBJ.o PreMesh.o Mesh.o Scene.o SceneNode.o
 PCH_SRC= $(Core)/masterInclude.hpp
-PCH_OUT= masterInclude.hpp.pch
+PCH_OUT= $(Core)/masterInclude.hpp.pch
 # PCH_HEADERS= 
 
 
