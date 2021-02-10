@@ -15,6 +15,7 @@ private:
     bool projectionTransformed;
     glm::mat4 viewMatrix;
     glm::mat4 projectionMatrix;
+    glm::mat4 rotationMatrix;
 
     glm::vec3 cameraPosition;
     glm::vec3 cameraRotation;

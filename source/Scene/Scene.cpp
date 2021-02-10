@@ -15,7 +15,7 @@ Scene::Scene(){
     projectionTransformed = true;
     cameraTransformed = true;
 
-    projectionMatrix = glm::perspective(64.0f, 16.0f / 9.0f, 1.0f, 1000.0f);
+    projectionMatrix = glm::perspective(0.56f, 16.0f / 9.0f, 1.0f, 1000.0f);
 
     cameraPosition = glm::vec3(0.0f, 0.0f, 0.0f);
     cameraRotation = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -25,6 +25,7 @@ Scene::Scene(){
     glm::mat4 rotationYMatrix = glm::rotate(rotationXMatrix, cameraRotation.y, glm::vec3(0,1,0));
     glm::mat4 rotationZMatrix = glm::rotate(rotationYMatrix, cameraRotation.z, glm::vec3(0,0,1));
     viewMatrix = glm::inverse(glm::scale(rotationZMatrix, cameraScaling));
+    rotationMatrix = glm::mat4(1.0f);
 
     std::shared_ptr<VertexBuffer> vbo(new VertexBuffer(vertices, sizeof(vertices) / sizeof(float)));
     std::shared_ptr<IndexBuffer> ibo(new IndexBuffer(indices, sizeof(vertices) / sizeof(float)));
@@ -54,10 +55,13 @@ void Scene::render(){
     //     projectionMatrix = glm::perspective(64.0f, 16.0f / 9.0f, 0.1f, 100.0f);
     //     std::cout << "projectioned" << std::endl;
     // }
-    
-    glm::mat4 modelMatrix = glm::rotate(glm::mat4(0.9f), 1.5f, glm::vec3(0,1,0));
-
+    float speed = 3.14f / 240.0f;
+    rotationMatrix = glm::rotate(glm::rotate(glm::rotate(rotationMatrix, speed, glm::vec3(0,1,0)), speed, glm::vec3(1,0,0)), speed, glm::vec3(0,0,1));
+    // glm::mat4 mat1 = glm::mat4(1.0f);
+    // glm::mat4 mat2 = glm::mat4(1.0f);
+    // bool equal = mat1 == rotationMatrix;
+    // std::cout << equal << std::endl;
     for(int i = 0; i < meshVector.size(); i++){
-        meshVector[i].render(modelMatrix);
+        meshVector[i].render(rotationMatrix);
     }
 }  

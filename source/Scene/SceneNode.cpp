@@ -34,7 +34,7 @@ void SceneNode::render(const glm::mat4& viewMatrix, const glm::mat4& projectionM
 }
 
 void SceneNode::transpose(){
-    glm::transpose(modelMatrix);
+    modelMatrix = glm::transpose(modelMatrix);
 }
 
 void SceneNode::translate(const glm::vec3& translationVec3){
