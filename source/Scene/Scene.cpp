@@ -21,8 +21,8 @@ Scene::Scene(){
 
 void Scene::render(){
     float speed = 3.14f / 250.0f;
-    rotationMatrix = glm::rotate(glm::rotate(glm::rotate(rotationMatrix, speed, glm::vec3(0,1,0)), speed, glm::vec3(1,0,0)), speed, glm::vec3(0,0,1));
-
+    rotationMatrix = glm::rotate(glm::rotate(rotationMatrix, speed, glm::vec3(0,1,0)), speed / 4, glm::vec3(0,0,1));
+    // rotationMatrix = glm::rotate(rotationMatrix, speed, glm::vec3(0,1,0));
     for(int i = 0; i < meshVector.size(); i++){
         meshVector[i].render(rotationMatrix);
     }
