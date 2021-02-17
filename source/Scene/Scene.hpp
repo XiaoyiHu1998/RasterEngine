@@ -16,6 +16,7 @@ private:
 public:
     Scene();
     void render();
+    void render(int viewportwidth, int viewportHeight);
 };
 
 #endif //SCENE_HPP
