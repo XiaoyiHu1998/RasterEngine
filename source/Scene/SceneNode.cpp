@@ -1,6 +1,6 @@
 #include "SceneNode.hpp"
 
-SceneNode::SceneNode(int nodeDepth, bool visible, Mesh mesh):
+SceneNode::SceneNode(Mesh mesh, int nodeDepth, bool visible):
     nodeDepth{nodeDepth},
     visible{visible},
     mesh{mesh},
@@ -102,7 +102,7 @@ void SceneNode::resetTransform(const glm::mat4& transformVec3){
 //TODO: needs to check if buffers get destroyed due to pass by copy
 void SceneNode::addChildNode(Mesh mesh){
     if(child == nullptr){ 
-        child = std::shared_ptr<SceneNode>(new SceneNode(nodeDepth + 1, true, mesh));
+        child = std::shared_ptr<SceneNode>(new SceneNode(mesh, nodeDepth + 1, true));
     }
     else{
         exit(-69);

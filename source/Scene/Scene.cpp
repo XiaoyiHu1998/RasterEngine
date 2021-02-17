@@ -1,7 +1,8 @@
 #include "Scene.hpp"
 
 Scene::Scene():
-    camera(Camera(64.0f, 0.1, 500.0f, 16.0f / 9.0f, glm::vec3(0,0,1.5f), glm::vec3(0,0,0)))
+    renderLayers{std::vector<SceneNode>()},
+    camera{Camera(45.0f, 0.1, 500.0f, 16.0f / 9.0f, glm::vec3(0,0,1.3f), glm::vec3(0,0,0))}
     {
         //temp
         float vertices[] = {
@@ -18,16 +19,17 @@ Scene::Scene():
         std::shared_ptr<VertexBuffer> vbo(new VertexBuffer(vertices, sizeof(vertices) / sizeof(float)));
         std::shared_ptr<IndexBuffer> ibo(new IndexBuffer(indices, sizeof(vertices) / sizeof(float)));
         std::shared_ptr<Shader> shader(new Shader());
-        meshVector.push_back(Mesh(vbo, ibo, shader));
+        renderLayers.push_back(SceneNode(Mesh(vbo, ibo, shader)));
+        renderLayers[0].addChildNode(Mesh(vbo, ibo, shader));
     }
 
 void Scene::render(){
     float speed = 3.14f / 250.0f;
     rotationMatrix = glm::rotate(glm::rotate(rotationMatrix, speed, glm::vec3(0,1,0)), speed / 4, glm::vec3(0,0,1));
 
-    glm::mat4 matrix = camera.getProjectionMatrix() * camera.getViewMatrix() *  rotationMatrix;
-    for(int i = 0; i < meshVector.size(); i++){
-        meshVector[i].render(matrix);
+    for(SceneNode& renderLayer : renderLayers){
+        renderLayer.rotate(glm::vec3(0,0,0.01));
+        renderLayer.render(camera.getViewMatrix() * rotationMatrix, camera.getProjectionMatrix());
     }
 }  
 
@@ -37,8 +39,15 @@ void Scene::render(int viewportWidth, int viewportHeight){
 
     camera.setAspectRatio((float)viewportWidth, (float)viewportHeight);
 
-    glm::mat4 matrix = camera.getProjectionMatrix() * camera.getViewMatrix() *  rotationMatrix;
-    for(int i = 0; i < meshVector.size(); i++){
-        meshVector[i].render(matrix);
+    for(SceneNode& renderLayer : renderLayers){
+        renderLayer.rotate(glm::vec3(0,0,0.01));
+        renderLayer.render(camera.getViewMatrix() * rotationMatrix, camera.getProjectionMatrix());
     }
-}  
+}
+
+// old meshVector code just in case
+    // glm::mat4 matrix = camera.getProjectionMatrix() * camera.getViewMatrix() *  rotationMatrix;
+    // for(int i = 0; i < meshVector.size(); i++){
+    //     meshVector[i].render(matrix);
+    // }
+        // meshVector.push_back(Mesh(vbo, ibo, shader));

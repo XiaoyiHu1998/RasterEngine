@@ -21,7 +21,7 @@ private:
     glm::mat4 setWorldSpaceMatrix();
     glm::mat4 calcModelMatrix();
 public:
-    SceneNode(int nodeDepth, bool visible, Mesh mesh);
+    SceneNode(Mesh mesh, int nodeDepth = 0, bool visible = true);
     void render(const glm::mat4& viewMatrix, const glm::mat4& projectionMatrix);
     void translate(const glm::vec3& translationVec3);
     void setLocation(const glm::vec3& translationVec3);
