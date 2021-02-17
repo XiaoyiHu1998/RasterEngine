@@ -3,10 +3,12 @@ layout(location = 0)in vec4 vPosition;
 
 out vec4 vertexPos;
 uniform vec4 location;
-uniform mat4 projectionMatrix;
+uniform mat4 mvpMatrix;
 
 void main()
 {
-    gl_Position = vPosition + (location / 5);
-    vertexPos = vPosition + (location); 
+    vertexPos = mvpMatrix * vPosition + vec4(0.5, 0.5, 0.5, 0.5); //for color
+
+
+    gl_Position = mvpMatrix * vPosition;
 }
