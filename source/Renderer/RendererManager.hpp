@@ -6,7 +6,6 @@
 
 class RendererManager{
 private:
-    Camera camera;
     SceneRenderer scene;
     UIRenderer ui;
 

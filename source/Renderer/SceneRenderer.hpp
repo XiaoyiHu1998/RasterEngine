@@ -24,7 +24,7 @@ public:
     SceneRenderer(std::shared_ptr<Scene> scenePointer);
     void createFrameBuffer();
     void setRenderResolution(ImVec2 viewportSize);
-    unsigned int renderScene(const Camera& camera);
+    unsigned int renderScene();
 };
 
 #endif //SCENE_RENDERER_HPP

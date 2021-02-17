@@ -7,9 +7,9 @@ class Camera{
 private:
     bool cameraUpdated;
     bool projectionSettingsUpdated;
+    float fov;
     float nearClippingPlane;
     float farClippingPlane;
-    float fov;
     float aspectRatio;
 
     glm::vec3 position;
@@ -18,20 +18,17 @@ private:
     glm::mat4 viewMatrix;
     glm::mat4 projectionMatrix;
     glm::mat4 screenSpaceMatrix;
-
-    void updateViewMatrix();
-    void updateProjectionMatrix();
 public:
-    Camera();
+    Camera(float fovyDegrees, float nearClippingPlane, float farClippingPlane, float aspectRatio, glm::vec3 pos, glm::vec3 rot);
     void setPosition(const glm::vec3& newPosition);
     void translate(const glm::vec3& translation);
     void setRotation(const glm::vec3& newRotation);
     void rotate(const glm::vec3& rotated);
     void setNearClippingPlane(float newClippingDistance);
     void setFarClippingPlane(float newClippingDistance);
-    void setCameraAspectRatio(float width, float height);
-    void setCameraFovY(float fovY);
-    void setCameraFovX(float fovY);
+    void setAspectRatio(float width, float height);
+    void setFovY(float fovY);
+    void setFovX(float fovY);
     glm::mat4 getProjectionMatrix();
     glm::mat4 getViewMatrix();
 };
