@@ -85,9 +85,9 @@ unsigned int SceneRenderer::renderScene(){
 }
 
 void SceneRenderer::setRenderResolution(ImVec2 viewportSize){
-    if(viewportWidth != viewportSize.x && viewportHeight != viewportSize.y){
+    if(viewportWidth != viewportSize.x || viewportHeight != viewportSize.y){
         viewportSizeChanged = true;
-        viewportHeight = viewportSize.x;
+        viewportWidth = viewportSize.x;
         viewportHeight = viewportSize.y;
     }
 }
