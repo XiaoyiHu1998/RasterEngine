@@ -30,50 +30,53 @@ void SceneNode::render(const glm::mat4& viewMatrix, const glm::mat4& projectionM
     }
     glm::mat4 nodeMatrix = projectionMatrix * viewMatrix * modelMatrix;
     mesh.render(nodeMatrix);
-    child->render(viewMatrix, projectionMatrix);
-}
-
-void SceneNode::transpose(){
-    modelMatrix = glm::transpose(modelMatrix);
+    if(child != nullptr)
+        child->render(viewMatrix, projectionMatrix);
 }
 
 void SceneNode::translate(const glm::vec3& translationVec3){
     transformed = true;
     position += translationVec3;
-    child->translate(translationVec3);
+    if(child != nullptr)
+        child->translate(translationVec3);
 }
 
 void SceneNode::setLocation(const glm::vec3& translationVec3){
     transformed = true;
     glm::vec3 displacement = translationVec3 - position;
     position = translationVec3;
-    child->translate(displacement);
+    if(child != nullptr)
+        child->translate(displacement);
 }
 
 void SceneNode::rotate(const glm::vec3& rotationVec3){
     transformed = true;
     rotation += rotationVec3;
-    child->rotate(rotationVec3);
+    if(child != nullptr)
+        child->rotate(rotationVec3);
 }
 
 void SceneNode::setRotation(const glm::vec3& rotationVec3){
     transformed = true;
     glm::vec3 rotated = rotationVec3 - rotation;
     rotation = rotationVec3;
-    child->rotate(rotated);
+    if(child != nullptr)
+        child->rotate(rotated);
 }
 
 void SceneNode::scale(const glm::vec3& scaleVec3){
     transformed = true;
     scaling += scaleVec3;
-    child->scale(scaleVec3);
+    if(child != nullptr)
+        child->scale(scaleVec3);
 }
 
 void SceneNode::setScale(const glm::vec3& scaleVec3){
     transformed = true;
     glm::vec3 scaled = scaleVec3 - scaling;
     scaling = scaleVec3;
-    child->scale(scaled);
+    if(child != nullptr)
+        child->scale(scaled);
 }
 
 // void SceneNode::transform(const glm::mat4& transformVec3){}
@@ -88,16 +91,21 @@ void SceneNode::resetTransform(const glm::mat4& transformVec3){
     rotation = glm::vec3(0);
     scaling = glm::vec3(0);
 
-    child->translate(translationDone);
-    child->rotate(rotationDone);
-    child->scale(scalingDone);
+    if(child != nullptr){
+        child->translate(translationDone);
+        child->rotate(rotationDone);
+        child->scale(scalingDone);
+    }
 }
 
 // // void SceneNode::addMesh(Mesh mesh);
 //TODO: needs to check if buffers get destroyed due to pass by copy
 void SceneNode::addChildNode(Mesh mesh){
-    if(child = nullptr){ 
+    if(child == nullptr){ 
         child = std::shared_ptr<SceneNode>(new SceneNode(nodeDepth + 1, true, mesh));
+    }
+    else{
+        exit(-69);
     }
 }
 // void SceneNode::addChildNodeAtDepth(){}
