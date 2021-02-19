@@ -105,7 +105,7 @@ void SceneNode::addChildNode(Mesh mesh){
         child = std::shared_ptr<SceneNode>(new SceneNode(mesh, nodeDepth + 1, true));
     }
     else{
-        exit(-69);
+        child->addChildNode(mesh);
     }
 }
 // void SceneNode::addChildNodeAtDepth(){}
