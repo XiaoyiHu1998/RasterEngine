@@ -15,9 +15,9 @@ private:
 
     std::vector<Vertex> vertexArray;
     std::vector<Point> pointArray;
-    std::vector<line> lineArray;
-    std::vector<triangle> triangleArray;
-    std::vector<quad> quadArray;
+    std::vector<Line> lineArray;
+    std::vector<Triangle> triangleArray;
+    std::vector<Quad> quadArray;
 public:
     PreMesh();
     Mesh generateMesh();

@@ -36,14 +36,19 @@ struct vector3i{
 };
 
 struct Vertex{
-    int position;
-    int textureCoordinate;
-    int normal;
-    Vertex(int position = -1, int textureCoordinate = -1, int normal = -1){
-        position = position;
-        textureCoordinate = textureCoordinate;
-        normal = normal;
-    }
+    glm::vec3 position;
+    glm::vec3 normal;
+    glm::vec3 vertColor;
+    glm::vec2 texCoord;
+    Vertex(glm::vec3 position = glm::vec3(-1), glm::vec3 normal = glm::vec3(-1), glm::vec3 vertColor = glm::vec3(-1), glm::vec3 textureCoordinate = glm::vec3(-1)):
+        position{position},
+        normal{normal},
+        vertColor{vertColor},
+        texCoord{texCoord}
+        {}
+    void setNormals(){}
+    void setColors(){}
+    void setTexCoord(){}
 };
 
 struct Point{
@@ -53,7 +58,7 @@ struct Point{
     }
 };
 
-struct line{
+struct Line{
     Vertex vertices[2];
     line(Vertex vert0, Vertex vert1){
         vertices[0] = vert0;
@@ -61,7 +66,7 @@ struct line{
     }
 };
 
-struct triangle{
+struct Triangle{
     Vertex vertices[3];
     triangle(Vertex vert0, Vertex vert1, Vertex vert2){
         vertices[0] = vert0;
@@ -70,7 +75,7 @@ struct triangle{
     }
 };
 
-struct quad{
+struct Quad{
     Vertex vertices[4];
     quad(Vertex vert0, Vertex vert1, Vertex vert2, Vertex vert3){
         vertices[0] = vert0;
