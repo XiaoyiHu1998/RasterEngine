@@ -60,7 +60,7 @@ struct Point{
 
 struct Line{
     Vertex vertices[2];
-    line(Vertex vert0, Vertex vert1){
+    Line(Vertex vert0, Vertex vert1){
         vertices[0] = vert0;
         vertices[2] = vert1;
     }
@@ -68,7 +68,7 @@ struct Line{
 
 struct Triangle{
     Vertex vertices[3];
-    triangle(Vertex vert0, Vertex vert1, Vertex vert2){
+    Triangle(Vertex vert0, Vertex vert1, Vertex vert2){
         vertices[0] = vert0;
         vertices[1] = vert1;
         vertices[2] = vert2;
@@ -77,7 +77,7 @@ struct Triangle{
 
 struct Quad{
     Vertex vertices[4];
-    quad(Vertex vert0, Vertex vert1, Vertex vert2, Vertex vert3){
+    Quad(Vertex vert0, Vertex vert1, Vertex vert2, Vertex vert3){
         vertices[0] = vert0;
         vertices[1] = vert1;
         vertices[2] = vert2;
