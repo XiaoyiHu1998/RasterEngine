@@ -15,12 +15,13 @@
 #include "GLM/ext/matrix_transform.hpp"
 #include "GLM/gtc/type_ptr.hpp"
 
-#include <thread>
-#include <iostream>
+#include <chrono>
 #include <fstream>
-#include <vector>
-#include <string>
 #include <functional>
+#include <iostream>
+#include <string>
+#include <thread>
+#include <vector>
 
 #include "Primitives.hpp"
 #include "errorChecking.hpp"
