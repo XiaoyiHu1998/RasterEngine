@@ -1,87 +1,47 @@
 #ifndef PRIMITIVES_HPP
 #define PRIMITIVES_HPP
 
-struct vector2f{
-    float x, y;
-    vector2f(float x = 0, float y = 0){
-        x = x;
-        y = y;
-    }
-};
-
-struct vector2i{
-    int x, y;
-    vector2i(int x = 0, int y = 0){
-        x = x;
-        y = y;
-    }
-};
-
-struct vector3f{
-    float x, y, z;
-    vector3f(float x = 0, float y = 0, float z = 0){
-        x = x;
-        y = y;
-        z = z;
-    }
-};
-
-struct vector3i{
-    int x, y, z;
-    vector3i(int x = 0, int y = 0, int z = 0){
-        x = x;
-        y = y;
-        z = z;
-    }
-};
-
 struct Vertex{
     glm::vec3 position;
     glm::vec3 normal;
     glm::vec3 vertColor;
     glm::vec2 texCoord;
-    Vertex(glm::vec3 position = glm::vec3(-1), glm::vec3 normal = glm::vec3(-1), glm::vec3 vertColor = glm::vec3(-1), glm::vec3 textureCoordinate = glm::vec3(-1)):
+    Vertex(const glm::vec3& position = glm::vec3(-1), const glm::vec3& normal = glm::vec3(-1), const glm::vec3& vertColor = glm::vec3(-1), const glm::vec3& textureCoordinate = glm::vec3(-1)):
         position{position},
         normal{normal},
         vertColor{vertColor},
         texCoord{texCoord}
         {}
-    void setNormals(){}
-    void setColors(){}
-    void setTexCoord(){}
+    void setNormals(const glm::vec3& normalIndices)     { normal = normalIndices;       }
+    void setColors(const glm::vec3& colorIndices)       { vertColor = colorIndices;     }
+    void setTexCoords(const glm::vec3& texCoordIndices) { texCoord = texCoordIndices;   }
 };
 
 struct Point{
-    Vertex vertex;
-    Point(Vertex vertex){
-        vertex = vertex;
+    int vertex;
+    Point(int vertIndex){
+        vertex = vertIndex;
     }
 };
 
 struct Line{
-    Vertex vertices[2];
-    Line(Vertex vert0, Vertex vert1){
-        vertices[0] = vert0;
-        vertices[2] = vert1;
+    glm::vec2 vertices;
+    Line(const glm::vec2& vertIndices){
+        vertices = vertIndices;
     }
 };
 
 struct Triangle{
-    Vertex vertices[3];
-    Triangle(Vertex vert0, Vertex vert1, Vertex vert2){
-        vertices[0] = vert0;
-        vertices[1] = vert1;
-        vertices[2] = vert2;
+    glm::vec3 vertices;
+    Triangle(const glm::vec3& vertIndices){
+        vertices = vertIndices;
     }
 };
 
 struct Quad{
-    Vertex vertices[4];
-    Quad(Vertex vert0, Vertex vert1, Vertex vert2, Vertex vert3){
-        vertices[0] = vert0;
-        vertices[1] = vert1;
-        vertices[2] = vert2;
-        vertices[3] = vert3;
+    glm::vec4 vertices;
+    Quad(const glm::vec4& vertIndices){
+        vertices = vertIndices;
     }
 };
 
