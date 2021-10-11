@@ -55,6 +55,12 @@
         "xlocbuf": "cpp",
         "xlocmes": "cpp",
         "xlocmon": "cpp",
-        "xloctime": "cpp"
+        "xloctime": "cpp",
+        "array": "cpp",
+        "atomic": "cpp",
+        "compare": "cpp",
+        "set": "cpp",
+        "sstream": "cpp",
+        "xtree": "cpp"
     }
 }

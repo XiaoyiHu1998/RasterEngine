@@ -10,4 +10,5 @@ RasterEngine::RasterEngine(GLFWwindow* window):
 
 void RasterEngine::draw(){
     rendererManager.renderProgramWindow();
+    RE_STUB("stubtest");
 }

@@ -30,6 +30,10 @@ Mesh Importer_OBJ::import(const std::string& filepath) {
     std::cout << "import finished" << std::endl;
 }
 
+bool Importer_OBJ::legalKeyword(std::string& keyword){
+    return keywords.find(keyword) != keywords.end();
+}
+
 void Importer_OBJ::handleInputLine(const std::string& inputLine, std::vector<PreMesh>& preMeshes){
     std::vector<std::string> splitLine;
     splitLine.push_back(std::string("")); 
@@ -51,59 +55,64 @@ void Importer_OBJ::handleInputLine(const std::string& inputLine, std::vector<Pre
     // std::cout << "====> split <====" << std::endl;
 
     #define CURRENT_PREMESH preMeshes[preMeshes.size() - 1]
-    if(splitLine[0] == std::string("#")){
-        return;
-    }
-    else if(splitLine[0] == std::string("v")){
-        for(int j = 0; j < parameterCount; j++){
-            CURRENT_PREMESH.addVertexPosition(std::stof(splitLine[j + 1]));
+    #define FIRSTWORD splitLine[0]
+    if(legalKeyword(FIRSTWORD)){
+        if(splitLine[0] == std::string("#")){
+            return;
         }
-    }
-    else if(splitLine[0] == std::string("vt")){
-        for(int j = 0; j < parameterCount; j++){
-            CURRENT_PREMESH.addVertexTexturePosition(std::stof(splitLine[j + 1]));
+        else if(splitLine[0] == std::string("v")){
+            for(int j = 0; j < parameterCount; j++){
+                CURRENT_PREMESH.addVertexPosition(std::stof(splitLine[j + 1]));
+            }
         }
-    }
-    else if(splitLine[0] == std::string("vn")){
-        for(int j = 0; j < parameterCount; j++){
-            CURRENT_PREMESH.addVertexNormalComponent(std::stof(splitLine[j + 1]));
+        else if(splitLine[0] == std::string("vt")){
+            for(int j = 0; j < parameterCount; j++){
+                CURRENT_PREMESH.addVertexTexturePosition(std::stof(splitLine[j + 1]));
+            }
         }
-    }
-    else if(splitLine[0] == std::string("p")){
-        CURRENT_PREMESH.addPoint(inputLine);
-    }
-    else if(splitLine[0] == std::string("l")){
-        CURRENT_PREMESH.addLine(inputLine);
-    }
-    else if(splitLine[0] == std::string("f")){
-        if(parameterCount == 3){
-            CURRENT_PREMESH.addTriangle(inputLine);
+        else if(splitLine[0] == std::string("vn")){
+            for(int j = 0; j < parameterCount; j++){
+                CURRENT_PREMESH.addVertexNormalComponent(std::stof(splitLine[j + 1]));
+            }
         }
-        else if(parameterCount == 4){
-            CURRENT_PREMESH.addQuad(inputLine);
+        else if(splitLine[0] == std::string("p")){
+            CURRENT_PREMESH.addPoint(inputLine);
         }
-    }
-    else if(splitLine[0] == std::string("mtllib")){
-        mtlPresentForCurrentFile = true;
-        mtlFilePath = splitLine[1];
-    }
-    else if(splitLine[0] == std::string("usemtl")){
-        materialName = splitLine[1];
-    }
-    else if(splitLine[0] == std::string("o")){
-        preMeshes.push_back(PreMesh());
-    }
-    else if(splitLine[0] == std::string("s")){ 
-        if(splitLine[1] == std::string("off")){
-            // TODO: no smoothinggroups
+        else if(splitLine[0] == std::string("l")){
+            CURRENT_PREMESH.addLine(inputLine);
         }
-        else{
-            // TODO: smoothinggroups
+        else if(splitLine[0] == std::string("f")){
+            if(parameterCount == 3){
+                CURRENT_PREMESH.addTriangle(inputLine);
+            }
+            else if(parameterCount == 4){
+                CURRENT_PREMESH.addQuad(inputLine);
+            }
+        }
+        else if(splitLine[0] == std::string("mtllib")){
+            mtlPresentForCurrentFile = true;
+            mtlFilePath = splitLine[1];
+        }
+        else if(splitLine[0] == std::string("usemtl")){
+            materialName = splitLine[1];
+        }
+        else if(splitLine[0] == std::string("o")){
+            preMeshes.push_back(PreMesh());
+        }
+        else if(splitLine[0] == std::string("s")){ 
+            if(splitLine[1] == std::string("off")){
+                // TODO: no smoothinggroups
+            }
+            else{
+                // TODO: smoothinggroups
+            }
         }
     }
     else{
         std::cout << "unsupported obj file" << std::endl;
     }
+    
 
     #undef CURRENT_PREMESH
+    #undef FIRSTWORD
 }

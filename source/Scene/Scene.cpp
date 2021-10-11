@@ -54,8 +54,8 @@ void Scene::render(int viewportWidth, int viewportHeight){
 }
 
 // old meshVector code just in case
-    // glm::mat4 matrix = camera.getProjectionMatrix() * camera.getViewMatrix() *  rotationMatrix;
-    // for(int i = 0; i < meshVector.size(); i++){
-    //     meshVector[i].render(matrix);
-    // }
-        // meshVector.push_back(Mesh(vbo, ibo, shader));
+// glm::mat4 matrix = camera.getProjectionMatrix() * camera.getViewMatrix() *  rotationMatrix;
+// for(int i = 0; i < meshVector.size(); i++){
+//     meshVector[i].render(matrix);
+// }
+    // meshVector.push_back(Mesh(vbo, ibo, shader));

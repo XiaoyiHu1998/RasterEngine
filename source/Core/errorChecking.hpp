@@ -41,6 +41,14 @@ static bool GLLogCall(const char* function, const char* path, int line){
     #define GLCall(x) x
 #endif // RE_DEBUG
 
+#define RE_STUB(stubString) do {\
+    static bool seen_this = false;\
+    if(!seen_this){\
+        seen_this = true;\
+        fprintf(stderr, "[STUB] %s | %s() %s:%d\n", stubString, __FUNCTION__, __FILE__, __LINE__);\
+    }\
+} while(false)
+
 
 static void outputBufferState(){
     std::cout << "vertexBuffer:\n";

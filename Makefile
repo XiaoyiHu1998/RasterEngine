@@ -21,7 +21,7 @@ Output=-o $(Bin)/RasterEngine.exe
 Objects= main.o RasterEngine.o RendererManager.o SceneRenderer.o UIRenderer.o Camera.o VertexBuffer.o IndexBuffer.o Shader.o ImportManager.o Importer_OBJ.o PreMesh.o Mesh.o Scene.o SceneNode.o
 PCH_SRC= $(Core)/masterInclude.hpp
 PCH_OUT= $(Core)/masterInclude.hpp.pch
-# PCH_HEADERS= 
+PCH_HEADERS= $(Core)/errorChecking.hpp
 
 
 all: program
@@ -49,8 +49,8 @@ clean: removeObjects
 clean: removeProgram
 
 
-$(PCH_OUT): $(PCH_SRC)
-	$(CC) $(PCH_SRC) $(LibPaths) $(Includes) -o $(PCH_OUT) -std=c++17 -O3 -g0
+$(PCH_OUT): $(PCH_SRC) $(PCH_HEADERS)
+	$(CC) $(PCH_SRC) $(LibPaths) $(Includes)  -o $(PCH_OUT) -std=c++17 -O3 -g0
 
 programRelease: $(Objects) $(PCH_OUT) $(Core)/errorChecking.hpp 
 	$(CC) $(Objects) $(Vendors) $(Includes) $(LibPaths) $(Libs) $(MiscFlags) $(Output) -O3 -g0
